@@ -8,7 +8,7 @@ G='\033[0;32m'; Y='\033[1;33m'; N='\033[0m'
 echo -e "${Y}Скачиваю Jarvis Installer...${N}"
 
 # Скачать архив с GitHub (замени на свой URL после публикации)
-REPO_URL="https://github.com/ТВОЙ_GITHUB/jarvis-installer"
+REPO_URL="https://github.com/newerayu-boop/jarvis-installer"
 
 if command -v git &>/dev/null; then
     git clone "$REPO_URL" jarvis-installer

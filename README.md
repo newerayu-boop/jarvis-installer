@@ -56,7 +56,7 @@ ssh root@ВАШ_IP_АДРЕС
 
 ### 3.2 Скачай установщик на сервер
 ```bash
-curl -sSL https://raw.githubusercontent.com/ТВОЙ_GITHUB/jarvis-installer/main/download.sh | bash
+curl -sSL https://raw.githubusercontent.com/newerayu-boop/jarvis-installer/main/download.sh | bash
 cd jarvis-installer
 ```
 
