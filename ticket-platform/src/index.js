@@ -17,10 +17,6 @@ async function main() {
     console.log(`   Public URL: ${process.env.PUBLIC_URL || 'http://localhost:' + PORT}`);
   });
 
-  // Telegram bot (long polling).
-  await bot.launch();
-  console.log('🤖 Telegram bot started');
-
   const shutdown = async (sig) => {
     console.log(`\n${sig} received, shutting down...`);
     bot.stop(sig);
@@ -30,6 +26,12 @@ async function main() {
   };
   process.once('SIGINT', () => shutdown('SIGINT'));
   process.once('SIGTERM', () => shutdown('SIGTERM'));
+
+  // Telegram bot (long polling). launch() only resolves once the bot stops,
+  // so we don't await it here — register handlers above first.
+  bot.launch({ dropPendingUpdates: true })
+    .catch((err) => { console.error('Bot launch failed:', err); process.exit(1); });
+  console.log('🤖 Telegram bot started');
 }
 
 main().catch((err) => {
