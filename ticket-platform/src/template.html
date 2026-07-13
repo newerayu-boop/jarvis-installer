@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<style>
+  /*FONTS*/
+  :root{
+    --black:#080808; --dark:#0e0e0e; --card:#141414; --border:#2a2a2a;
+    --gold:#E5B86F; --gold-light:#F3D293; --gold-deep:#C9A85D; --gold-dim:rgba(229,184,111,.13);
+    --white:#FAFAFA; --muted:#8c8c8c; --green:#22c55e;
+    --heading:'Montserrat',sans-serif; --body:'Manrope',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#000}
+  .stage{width:1080px;height:1980px;background:radial-gradient(120% 80% at 50% 0%,#161206 0%,#080808 55%);
+    display:flex;align-items:center;justify-content:center;font-family:var(--body)}
+
+  .ticket{
+    position:relative;width:900px;background:var(--dark);border-radius:44px;overflow:hidden;
+    box-shadow:0 40px 120px rgba(0,0,0,.7), 0 0 0 1.5px rgba(229,184,111,.35), inset 0 0 0 1px rgba(255,255,255,.02);
+  }
+
+  /* ===== TOP: artwork ===== */
+  .art{position:relative;height:1160px;overflow:hidden;background:#0a0a0a}
+  .art .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+  .art .glowL{position:absolute;left:-15%;top:20%;width:60%;height:60%;
+    background:radial-gradient(circle,rgba(229,184,111,.28),transparent 60%);filter:blur(20px)}
+  .art .vignette{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,8,8,.55) 0%,rgba(8,8,8,0) 22%,rgba(8,8,8,0) 55%,rgba(14,14,14,.85) 88%,var(--dark) 100%)}
+
+  .toprow{position:absolute;top:46px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:22px;
+    font-family:var(--body);font-weight:600;font-size:30px;letter-spacing:.3px;color:#eaeaea;z-index:3}
+  .toprow .dot{color:var(--gold)}
+  .toprow .chip{display:inline-flex;align-items:center;gap:10px}
+
+  .offline{position:absolute;top:108px;left:0;right:0;text-align:center;z-index:3;
+    font-family:var(--heading);font-weight:800;letter-spacing:14px;font-size:46px;
+    background:linear-gradient(90deg,#D29E4B,#F7E3B5 50%,#D29E4B);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  .speaker{position:absolute;left:0;right:0;bottom:44px;z-index:3;text-align:center}
+  .speaker .n{font-family:var(--heading);font-weight:700;font-size:52px;color:var(--white)}
+  .speaker .r{font-family:var(--body);font-weight:500;font-size:26px;color:var(--gold);letter-spacing:1px;margin-top:6px}
+
+  /* ===== tear line ===== */
+  .tear{position:relative;height:0}
+  .dash{position:absolute;top:-2px;left:60px;right:60px;height:4px;
+    background-image:linear-gradient(90deg,rgba(229,184,111,.55) 55%,transparent 0);background-size:34px 4px;background-repeat:repeat-x}
+
+  /* ===== BOTTOM: stub ===== */
+  .stub{position:relative;background:linear-gradient(180deg,#161616,#0f0f0f);padding:70px 70px 60px}
+  .stub .lbl{font-family:var(--body);font-weight:600;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+  .name{font-family:var(--heading);font-weight:800;font-size:88px;line-height:1;margin-top:12px;
+    background:linear-gradient(90deg,#E5B86F,#F7E3B5 55%,#E5B86F);-webkit-background-clip:text;background-clip:text;color:transparent;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .grid{display:flex;gap:24px;margin-top:52px}
+  .cell{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:22px;padding:26px 30px}
+  .cell .lbl{font-size:22px;letter-spacing:2px}
+  .cell .val{font-family:var(--heading);font-weight:700;font-size:44px;color:var(--white);margin-top:8px;display:flex;align-items:center;gap:12px}
+  .cell.gold{background:linear-gradient(135deg,rgba(229,184,111,.16),rgba(229,184,111,.05));border-color:rgba(229,184,111,.45)}
+  .cell.gold .val{color:var(--gold-light)}
+
+  .metarow{display:flex;justify-content:space-between;align-items:flex-end;margin-top:52px;gap:24px}
+  .leftcol{display:flex;flex-direction:column;gap:34px}
+  .brand{display:flex;align-items:center;gap:16px}
+  .brand .mark{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#E5B86F,#C9A85D);color:#0a0a0a;font-family:var(--heading);font-weight:900;font-size:34px}
+  .brand .txt b{display:block;font-family:var(--heading);font-weight:700;font-size:30px;color:var(--white);line-height:1.1}
+  .brand .txt span{font-family:var(--body);font-size:23px;color:var(--muted)}
+
+  .num .lbl{font-size:22px;letter-spacing:2px}
+  .num .v{font-family:var(--heading);font-weight:900;font-size:72px;color:var(--gold);line-height:1;margin-top:4px}
+
+  .qr{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .qr .box{width:190px;height:190px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 0 0 1.5px rgba(229,184,111,.5)}
+  .qr .box svg{width:100%;height:100%;display:block}
+  .qr .cap{font-family:var(--body);font-weight:600;font-size:20px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="ticket">
+      <div class="art">
+        <img class="photo" src="{{PHOTO}}" alt="">
+        <div class="glowL"></div>
+        <div class="vignette"></div>
+
+        <div class="toprow">
+          <span class="chip">🗓 {{DATE}}</span><span class="dot">•</span>
+          <span class="chip">🏢 {{VENUE}}</span><span class="dot">•</span>
+          <span class="chip">🕑 {{TIME}}</span>
+        </div>
+        <div class="offline">{{BADGE}}</div>
+
+        <div class="speaker">
+          <div class="n">{{SPEAKER}}</div>
+          <div class="r">{{EVENT_SUB}}</div>
+        </div>
+      </div>
+
+      <div class="tear"><div class="dash"></div></div>
+
+      <div class="stub">
+        <div class="lbl">{{LABEL_ATTENDEE}}</div>
+        <div class="name">{{NAME}}</div>
+
+        <div class="grid">
+          <div class="cell">
+            <div class="lbl">{{LABEL_VENUE}}</div>
+            <div class="val">{{VENUE}}</div>
+          </div>
+          <div class="cell gold">
+            <div class="lbl">{{LABEL_TARIF}}</div>
+            <div class="val">{{TARIF}}</div>
+          </div>
+        </div>
+
+        <div class="metarow">
+          <div class="leftcol">
+            <div class="num">
+              <div class="lbl">{{LABEL_NUMBER}}</div>
+              <div class="v">#{{NUMBER}}</div>
+            </div>
+            <div class="brand">
+              <div class="mark">{{BRAND_MARK}}</div>
+              <div class="txt"><b>{{BRAND_NAME}}</b><span>{{BRAND_URL}}</span></div>
+            </div>
+          </div>
+          <div class="qr">
+            <div class="box">{{QR}}</div>
+            <div class="cap">{{LABEL_QR}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
