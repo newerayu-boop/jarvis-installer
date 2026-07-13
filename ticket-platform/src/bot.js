@@ -56,8 +56,7 @@ async function issueAndSend(ctx, name, number, tarif) {
       {
         caption:
           `✅ Bilet tayyor!\n\n` +
-          `👤 ${name}\n🎫 Bilet raqami: #${number}\n💳 Tarif: ${tarif || config.defaultTarif}\n` +
-          `🔐 Kod: ${token}`,
+          `👤 ${name}\n🎫 Bilet raqami: #${number}\n💳 Tarif: ${tarif || config.defaultTarif}`,
       }
     );
   } catch (err) {

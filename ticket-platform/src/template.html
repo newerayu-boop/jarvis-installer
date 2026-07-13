@@ -49,9 +49,9 @@
   /* ===== BOTTOM: stub ===== */
   .stub{position:relative;background:linear-gradient(180deg,#161616,#0f0f0f);padding:70px 70px 60px}
   .stub .lbl{font-family:var(--body);font-weight:600;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
-  .name{font-family:var(--heading);font-weight:800;font-size:88px;line-height:1;margin-top:12px;
+  .name{font-family:var(--heading);font-weight:800;font-size:88px;line-height:1.06;margin-top:12px;
     background:linear-gradient(90deg,#E5B86F,#F7E3B5 55%,#E5B86F);-webkit-background-clip:text;background-clip:text;color:transparent;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    word-break:break-word;overflow-wrap:break-word}
 
   .grid{display:flex;gap:24px;margin-top:52px}
   .cell{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:22px;padding:26px 30px}
@@ -60,21 +60,16 @@
   .cell.gold{background:linear-gradient(135deg,rgba(229,184,111,.16),rgba(229,184,111,.05));border-color:rgba(229,184,111,.45)}
   .cell.gold .val{color:var(--gold-light)}
 
-  .metarow{display:flex;justify-content:space-between;align-items:flex-end;margin-top:52px;gap:24px}
-  .leftcol{display:flex;flex-direction:column;gap:34px}
+  .metarow{display:flex;justify-content:space-between;align-items:flex-end;margin-top:56px;gap:24px}
   .brand{display:flex;align-items:center;gap:16px}
   .brand .mark{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;
     background:linear-gradient(135deg,#E5B86F,#C9A85D);color:#0a0a0a;font-family:var(--heading);font-weight:900;font-size:34px}
   .brand .txt b{display:block;font-family:var(--heading);font-weight:700;font-size:30px;color:var(--white);line-height:1.1}
   .brand .txt span{font-family:var(--body);font-size:23px;color:var(--muted)}
 
+  .num{text-align:right}
   .num .lbl{font-size:22px;letter-spacing:2px}
-  .num .v{font-family:var(--heading);font-weight:900;font-size:72px;color:var(--gold);line-height:1;margin-top:4px}
-
-  .qr{display:flex;flex-direction:column;align-items:center;gap:12px}
-  .qr .box{width:190px;height:190px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 0 0 1.5px rgba(229,184,111,.5)}
-  .qr .box svg{width:100%;height:100%;display:block}
-  .qr .cap{font-family:var(--body);font-weight:600;font-size:20px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+  .num .v{font-family:var(--heading);font-weight:900;font-size:78px;color:var(--gold);line-height:1;margin-top:6px}
 </style>
 </head>
 <body>
@@ -116,23 +111,41 @@
         </div>
 
         <div class="metarow">
-          <div class="leftcol">
-            <div class="num">
-              <div class="lbl">{{LABEL_NUMBER}}</div>
-              <div class="v">#{{NUMBER}}</div>
-            </div>
-            <div class="brand">
-              <div class="mark">{{BRAND_MARK}}</div>
-              <div class="txt"><b>{{BRAND_NAME}}</b><span>{{BRAND_URL}}</span></div>
-            </div>
+          <div class="brand">
+            <div class="mark">{{BRAND_MARK}}</div>
+            <div class="txt"><b>{{BRAND_NAME}}</b><span>{{BRAND_URL}}</span></div>
           </div>
-          <div class="qr">
-            <div class="box">{{QR}}</div>
-            <div class="cap">{{LABEL_QR}}</div>
+          <div class="num">
+            <div class="lbl">{{LABEL_NUMBER}}</div>
+            <div class="v">#{{NUMBER}}</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    // Auto-fit the attendee name: shrink font-size so long names stay inside
+    // the ticket (up to 2 lines) instead of overflowing.
+    (function () {
+      function fit() {
+        var el = document.querySelector('.name');
+        if (!el) { window.__fitDone = true; return; }
+        var size = 88, min = 34;
+        el.style.fontSize = size + 'px';
+        function lineH() { return parseFloat(getComputedStyle(el).lineHeight); }
+        // Reduce until it fits within 2 lines and does not overflow width.
+        while (size > min &&
+              (el.scrollHeight > lineH() * 2 + 2 || el.scrollWidth > el.clientWidth + 1)) {
+          size -= 2;
+          el.style.fontSize = size + 'px';
+        }
+        window.__fitDone = true;
+      }
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      else if (document.readyState !== 'loading') fit();
+      else document.addEventListener('DOMContentLoaded', fit);
+    })();
+  </script>
 </body>
 </html>
