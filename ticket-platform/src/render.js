@@ -19,11 +19,16 @@ const PHOTO_DATA_URI = (() => {
 
 // One shared browser instance for the whole process.
 let browserPromise = null;
-function getBrowser() {
+async function getBrowser() {
   if (!browserPromise) {
     const opts = { args: ['--no-sandbox', '--disable-dev-shm-usage'] };
     if (process.env.CHROMIUM_PATH) opts.executablePath = process.env.CHROMIUM_PATH;
-    browserPromise = chromium.launch(opts);
+    browserPromise = chromium.launch(opts).then((b) => {
+      // If Chromium dies (crash/OOM), drop the handle so the next render
+      // relaunches a fresh browser instead of failing forever.
+      b.on('disconnected', () => { browserPromise = null; });
+      return b;
+    }).catch((err) => { browserPromise = null; throw err; });
   }
   return browserPromise;
 }
@@ -64,21 +69,31 @@ async function renderTicket(data) {
   html = html.replace(/\{\{(\w+)\}\}/g, (m, key) =>
     Object.prototype.hasOwnProperty.call(values, key) ? values[key] : m);
 
-  const browser = await getBrowser();
-  const page = await browser.newPage({
-    viewport: { width: 1080, height: 1980 },
-    deviceScaleFactor: 1,
-  });
-  try {
-    await page.setContent(html, { waitUntil: 'networkidle' });
-    // Wait for the name auto-fit script to finish sizing.
-    await page.waitForFunction(() => window.__fitDone === true, { timeout: 3000 })
-      .catch(() => {});
-    const el = await page.$('.ticket');
-    return await el.screenshot({ type: 'png' });
-  } finally {
-    await page.close();
+  // One retry: if Chromium crashed between renders, getBrowser() will have
+  // been reset by the 'disconnected' handler, so the second attempt relaunches.
+  let lastErr;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    let page;
+    try {
+      const browser = await getBrowser();
+      page = await browser.newPage({
+        viewport: { width: 1080, height: 1980 },
+        deviceScaleFactor: 1,
+      });
+      await page.setContent(html, { waitUntil: 'networkidle' });
+      // Wait for the name auto-fit script to finish sizing.
+      await page.waitForFunction(() => window.__fitDone === true, { timeout: 3000 })
+        .catch(() => {});
+      const el = await page.$('.ticket');
+      return await el.screenshot({ type: 'png' });
+    } catch (err) {
+      lastErr = err;
+      browserPromise = null; // force a fresh browser on retry
+    } finally {
+      if (page) await page.close().catch(() => {});
+    }
   }
+  throw lastErr;
 }
 
 async function closeBrowser() {

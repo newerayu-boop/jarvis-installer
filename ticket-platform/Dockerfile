@@ -1,5 +1,6 @@
 # Playwright base image ships Chromium + all system deps — no browser download needed.
-FROM mcr.microsoft.com/playwright:v1.47.0-jammy
+# The tag MUST match the "playwright" version in package.json.
+FROM mcr.microsoft.com/playwright:v1.61.1-noble
 
 WORKDIR /app
 
