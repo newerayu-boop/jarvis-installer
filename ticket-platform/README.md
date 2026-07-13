@@ -1,89 +1,77 @@
 # 🎫 Ticket Platform — Sun'iy Intellekt
 
-Telegram-bot, который по **имени и номеру билета** мгновенно генерирует готовый
-брендированный билет (PNG) в стиле сайта suniyintellect.uz и записывает его в базу
-для **проверки по QR-коду на входе**.
+Telegram-бот, который по **имени и номеру билета** мгновенно генерирует готовый
+брендированный билет (PNG) в стиле сайта suniyintellect.uz.
 
-Продажник пишет боту `Nurgul Bekova 13` → получает картинку билета. На входе
-контролёр сканирует QR → видит, действителен ли билет, и отмечает вход
-(повторный скан того же билета показывает «уже использован»).
+Продавец пишет боту `Nurgul Bekova 13` → получает картинку билета, готовую к
+отправке клиенту.
 
----
-
-## Как это работает
-
-```
-Продажник ──▶ Telegram-бот ──▶ рендер PNG (Chromium) ──▶ картинка билета
-                   │
-                   └──▶ запись в базу (Supabase): token, имя, номер, тариф
-
-Контролёр ──▶ сканирует QR ──▶ https://<ваш-домен>/t/<token>
-                                   ├─ ✅ действителен  → кнопка «Kirdi»
-                                   ├─ ⚠️ уже использован
-                                   └─ ⛔️ не найден (подделка)
-```
-
-Одно Node-приложение делает и бота, и веб-страницу проверки.
+Билет рисуется через **Satori + resvg** (без браузера), поэтому проект **бесплатно
+разворачивается на Vercel** и работает без «засыпаний».
 
 ---
 
-## Что вводит продажник
+## Что вводит продавец
 
-- **Одной строкой:** `Nurgul Bekova 13`
-- **Или по шагам:** команда `/new` → «Имя?» → «Номер?»
+- **Имя + номер:** `Nurgul Bekova 13`
+- **Имя + номер + тариф:** `Nurgul Bekova 13 VIP`
 
-Всё остальное (дата, площадка, время, спикер, тариф по умолчанию) зашито в
-`src/config.js` и одинаково для всего мероприятия.
+Всё остальное (дата, площадка, время, спикер, тариф по умолчанию) задаётся в
+`config.js` и одинаково для всего мероприятия.
 
 ---
 
-## Локальный запуск
+## 🚀 Деплой на Vercel (бесплатно, рекомендуется)
+
+1. Запушьте репозиторий на GitHub (уже сделано).
+2. Зайдите на [vercel.com](https://vercel.com) → войдите через GitHub.
+3. **Add New → Project** → выберите репозиторий `jarvis-installer`.
+4. В настройках импорта:
+   - **Root Directory** → нажмите *Edit* и укажите `ticket-platform`.
+   - Framework Preset: **Other**.
+5. **Environment Variables** — добавьте:
+   | Ключ | Значение |
+   |---|---|
+   | `BOT_TOKEN` | токен от @BotFather |
+   | `ALLOWED_USER_IDS` | Telegram ID продавцов через запятую (можно оставить пустым) |
+   | `SETUP_SECRET` | любое секретное слово, напр. `mysecret123` |
+6. **Deploy**. Дождитесь адреса вида `https://your-project.vercel.app`.
+7. **Подключите webhook** — один раз откройте в браузере:
+   ```
+   https://your-project.vercel.app/api/webhook?setup=mysecret123
+   ```
+   (подставьте свой `SETUP_SECRET`). Увидите `{"result":{"ok":true}}` — готово.
+8. Напишите боту `Nurgul Bekova 13` — придёт билет. 🎉
+
+> Каждое обновление кода в GitHub Vercel деплоит автоматически.
+
+---
+
+## 🖥 Локальный запуск / другой хостинг (VPS, Railway)
+
+Тот же код умеет работать в режиме long-polling:
 
 ```bash
 cd ticket-platform
-npm install                 # поставит зависимости + Chromium
-cp .env.example .env        # впишите BOT_TOKEN (минимум)
-npm start
+npm install
+cp .env.example .env      # впишите BOT_TOKEN
+npm start                 # 🤖 бот на long-polling
 ```
-
-Без Supabase билеты пишутся в локальный `data/tickets.json` — удобно для теста.
 
 **Превью билета без бота:**
 ```bash
 npm run preview -- "Nurgul Bekova" 13 Standart   # → preview.png
 ```
 
----
-
-## Настройка
-
-### 1. Токен бота
-Создайте бота у [@BotFather](https://t.me/BotFather) → `/newbot` → скопируйте токен
-в `BOT_TOKEN`.
-
-### 2. Кто может пользоваться ботом
-Узнайте свой Telegram ID у [@userinfobot](https://t.me/userinfobot) и впишите ID
-продажников через запятую в `ALLOWED_USER_IDS`. Пусто = доступ всем (не для прода).
-
-### 3. База (Supabase) — нужна для QR-проверки
-1. В Supabase → **SQL Editor** выполните `supabase/schema.sql`.
-2. **Project Settings → API** → скопируйте:
-   - `Project URL` → `SUPABASE_URL`
-   - `service_role` ключ → `SUPABASE_SERVICE_KEY` (секретный, только на сервере!)
-
-### 4. Публичный адрес для QR
-После деплоя впишите в `PUBLIC_URL` полный адрес сервиса
-(например `https://tickets.suniyintellect.uz`). Именно на него ведёт QR.
-
-### 5. PIN контролёра (опционально)
-`STAFF_PIN=1234` — тогда при отметке входа страница спросит PIN, чтобы гость сам
-себя не «отметил».
+> ⚠️ Нельзя одновременно использовать webhook (Vercel) и polling для одного
+> токена — Telegram позволяет что-то одно. Для теста polling временно снимите
+> webhook: `https://api.telegram.org/bot<TOKEN>/deleteWebhook`.
 
 ---
 
-## Правка данных мероприятия
+## ⚙️ Правка данных мероприятия
 
-Всё в одном файле — `src/config.js`:
+Всё в одном файле — `config.js`:
 
 ```js
 event: {
@@ -92,25 +80,12 @@ event: {
   venue:    'M-Factor',
   speaker:  'Yusufbay Kadirov',
   eventSub: 'AI OFFLINE TRENING · 1 KUNLIK MASTER KLASS',
-  photo:    'assets/expert.jpg',   // фон-фото (положите в src/assets/)
 },
 defaultTarif: 'Standart',
 ```
 
----
-
-## Деплой (бесплатно) — Render
-
-1. Запушьте репозиторий на GitHub.
-2. [Render](https://render.com) → **New → Web Service** → выберите репозиторий.
-3. **Root Directory:** `ticket-platform`, **Runtime:** `Docker` (используется `Dockerfile`).
-4. В **Environment** добавьте переменные из `.env.example`
-   (`BOT_TOKEN`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `PUBLIC_URL`, …).
-   `PUBLIC_URL` = адрес, который выдаст Render (`https://xxx.onrender.com`).
-5. Deploy. Бот стартует, страница проверки доступна по `PUBLIC_URL`.
-
-> Chromium уже входит в Docker-образ (`mcr.microsoft.com/playwright`), скачивать
-> ничего не нужно. Railway / Fly.io разворачиваются так же по `Dockerfile`.
+Фото спикера и шрифты вшиты в `lib/assets.js` (base64). Чтобы поменять фото —
+замените и перегенерируйте (`scripts/build-assets.js`).
 
 ---
 
@@ -118,18 +93,16 @@ defaultTarif: 'Standart',
 
 ```
 ticket-platform/
+├── api/
+│   └── webhook.js      # Vercel: обработчик Telegram webhook
+├── lib/
+│   ├── ticket.js       # рендер билета (Satori → SVG → resvg → PNG)
+│   ├── assets.js       # шрифты + фото, вшитые в base64
+│   └── messages.js     # тексты и парсер ввода
 ├── src/
-│   ├── index.js        # запуск: бот + веб-сервер
-│   ├── bot.js          # логика Telegram-бота
-│   ├── render.js       # рендер билета в PNG (Chromium)
-│   ├── server.js       # страница проверки по QR + отметка входа
-│   ├── db.js           # хранилище (Supabase / локальный JSON)
-│   ├── token.js        # генератор кодов билетов
-│   ├── config.js       # ⚙️ данные мероприятия и бренда
-│   ├── template.html   # HTML-шаблон билета
-│   └── assets/         # фото + шрифты
-├── supabase/schema.sql # SQL для таблицы билетов
-├── scripts/preview.js  # генерация примера билета
-├── Dockerfile
-└── .env.example
+│   ├── index.js        # запуск polling-режима
+│   └── bot.js          # Telegram-бот (long polling)
+├── config.js           # ⚙️ данные мероприятия и бренда
+├── vercel.json
+└── scripts/preview.js  # генерация примера билета
 ```
