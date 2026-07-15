@@ -1,0 +1,476 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 5.04,
+   "text": "Agar siz hali xam chat gpc chat edi cloud chat di ishlat kiwatkan bo siz,"
+  },
+  {
+   "start": 5.24,
+   "end": 8.0,
+   "text": "siz vaxti izni behudda sarflawasiz."
+  },
+  {
+   "start": 8.16,
+   "end": 11.52,
+   "text": "Chunki 90% odamlar chunaqa notoqri ishliydi."
+  },
+  {
+   "start": 11.64,
+   "end": 14.32,
+   "text": "Chuni uchun, mayimda sizke taklifim bor."
+  },
+  {
+   "start": 14.46,
+   "end": 17.18,
+   "text": "Yakin kullarda offline tadbir qili yapman,"
+  },
+  {
+   "start": 17.28,
+   "end": 20.9,
+   "text": "kanday qilib suni intelektini toqri ishlatkan xol etdi,"
+  },
+  {
+   "start": 21.04,
+   "end": 24.3,
+   "text": "vaxti ingizni va puli ingizni teliyasiti aytib biraman."
+  },
+  {
+   "start": 24.48,
+   "end": 27.28,
+   "text": "Cloud proyekt, cloud ilovasidi,"
+  },
+  {
+   "start": 27.28,
+   "end": 31.34,
+   "text": "qanday qilib agentlar və khadimlar yaratisini koristik biramam."
+  },
+  {
+   "start": 31.44,
+   "end": 36.26,
+   "text": "Uzumda torti adam, yirmati adamni ikini qilib kemoxti."
+  },
+  {
+   "start": 36.36,
+   "end": 41.14,
+   "text": "Albatda kili cali sana qeklangan hamamani qitib qolamam."
+  }
+ ],
+ "words": [
+  {
+   "w": "Agar",
+   "s": 0.0,
+   "e": 0.48
+  },
+  {
+   "w": "siz",
+   "s": 0.48,
+   "e": 0.72
+  },
+  {
+   "w": "hali",
+   "s": 0.72,
+   "e": 1.28
+  },
+  {
+   "w": "xam",
+   "s": 1.28,
+   "e": 1.66
+  },
+  {
+   "w": "chat",
+   "s": 1.66,
+   "e": 1.92
+  },
+  {
+   "w": "gpc",
+   "s": 1.92,
+   "e": 2.34
+  },
+  {
+   "w": "chat",
+   "s": 2.34,
+   "e": 2.78
+  },
+  {
+   "w": "edi",
+   "s": 2.78,
+   "e": 3.04
+  },
+  {
+   "w": "cloud",
+   "s": 3.04,
+   "e": 3.42
+  },
+  {
+   "w": "chat",
+   "s": 3.42,
+   "e": 3.8
+  },
+  {
+   "w": "di",
+   "s": 3.8,
+   "e": 4.04
+  },
+  {
+   "w": "ishlat",
+   "s": 4.04,
+   "e": 4.2
+  },
+  {
+   "w": "kiwatkan",
+   "s": 4.2,
+   "e": 4.7
+  },
+  {
+   "w": "bo",
+   "s": 4.7,
+   "e": 4.86
+  },
+  {
+   "w": "siz,",
+   "s": 4.86,
+   "e": 5.04
+  },
+  {
+   "w": "siz",
+   "s": 5.24,
+   "e": 5.72
+  },
+  {
+   "w": "vaxti",
+   "s": 5.72,
+   "e": 6.26
+  },
+  {
+   "w": "izni",
+   "s": 6.26,
+   "e": 6.5
+  },
+  {
+   "w": "behudda",
+   "s": 6.5,
+   "e": 7.3
+  },
+  {
+   "w": "sarflawasiz.",
+   "s": 7.3,
+   "e": 8.0
+  },
+  {
+   "w": "Chunki",
+   "s": 8.16,
+   "e": 8.78
+  },
+  {
+   "w": "90",
+   "s": 8.78,
+   "e": 9.2
+  },
+  {
+   "w": "%",
+   "s": 9.2,
+   "e": 9.5
+  },
+  {
+   "w": "odamlar",
+   "s": 9.5,
+   "e": 10.18
+  },
+  {
+   "w": "chunaqa",
+   "s": 10.18,
+   "e": 10.68
+  },
+  {
+   "w": "notoqri",
+   "s": 10.68,
+   "e": 11.12
+  },
+  {
+   "w": "ishliydi.",
+   "s": 11.12,
+   "e": 11.52
+  },
+  {
+   "w": "Chuni",
+   "s": 11.64,
+   "e": 12.24
+  },
+  {
+   "w": "uchun,",
+   "s": 12.24,
+   "e": 12.74
+  },
+  {
+   "w": "mayimda",
+   "s": 12.74,
+   "e": 13.22
+  },
+  {
+   "w": "sizke",
+   "s": 13.22,
+   "e": 13.58
+  },
+  {
+   "w": "taklifim",
+   "s": 13.58,
+   "e": 14.18
+  },
+  {
+   "w": "bor.",
+   "s": 14.18,
+   "e": 14.32
+  },
+  {
+   "w": "Yakin",
+   "s": 14.46,
+   "e": 15.12
+  },
+  {
+   "w": "kullarda",
+   "s": 15.12,
+   "e": 15.5
+  },
+  {
+   "w": "offline",
+   "s": 15.5,
+   "e": 16.1
+  },
+  {
+   "w": "tadbir",
+   "s": 16.1,
+   "e": 16.58
+  },
+  {
+   "w": "qili",
+   "s": 16.58,
+   "e": 16.84
+  },
+  {
+   "w": "yapman,",
+   "s": 16.84,
+   "e": 17.18
+  },
+  {
+   "w": "kanday",
+   "s": 17.28,
+   "e": 18.0
+  },
+  {
+   "w": "qilib",
+   "s": 18.0,
+   "e": 18.32
+  },
+  {
+   "w": "suni",
+   "s": 18.32,
+   "e": 18.74
+  },
+  {
+   "w": "intelektini",
+   "s": 18.74,
+   "e": 19.42
+  },
+  {
+   "w": "toqri",
+   "s": 19.42,
+   "e": 19.82
+  },
+  {
+   "w": "ishlatkan",
+   "s": 19.82,
+   "e": 20.28
+  },
+  {
+   "w": "xol",
+   "s": 20.28,
+   "e": 20.62
+  },
+  {
+   "w": "etdi,",
+   "s": 20.62,
+   "e": 20.9
+  },
+  {
+   "w": "vaxti",
+   "s": 21.04,
+   "e": 21.62
+  },
+  {
+   "w": "ingizni",
+   "s": 21.62,
+   "e": 22.0
+  },
+  {
+   "w": "va",
+   "s": 22.0,
+   "e": 22.2
+  },
+  {
+   "w": "puli",
+   "s": 22.2,
+   "e": 22.66
+  },
+  {
+   "w": "ingizni",
+   "s": 22.66,
+   "e": 22.88
+  },
+  {
+   "w": "teliyasiti",
+   "s": 22.88,
+   "e": 23.5
+  },
+  {
+   "w": "aytib",
+   "s": 23.5,
+   "e": 24.06
+  },
+  {
+   "w": "biraman.",
+   "s": 24.06,
+   "e": 24.3
+  },
+  {
+   "w": "Cloud",
+   "s": 24.48,
+   "e": 25.1
+  },
+  {
+   "w": "proyekt,",
+   "s": 25.1,
+   "e": 25.76
+  },
+  {
+   "w": "cloud",
+   "s": 25.9,
+   "e": 26.22
+  },
+  {
+   "w": "ilovasidi,",
+   "s": 26.22,
+   "e": 27.28
+  },
+  {
+   "w": "qanday",
+   "s": 27.28,
+   "e": 27.86
+  },
+  {
+   "w": "qilib",
+   "s": 27.86,
+   "e": 28.12
+  },
+  {
+   "w": "agentlar",
+   "s": 28.12,
+   "e": 28.78
+  },
+  {
+   "w": "və",
+   "s": 28.78,
+   "e": 29.22
+  },
+  {
+   "w": "khadimlar",
+   "s": 29.22,
+   "e": 29.94
+  },
+  {
+   "w": "yaratisini",
+   "s": 29.94,
+   "e": 30.46
+  },
+  {
+   "w": "koristik",
+   "s": 30.46,
+   "e": 31.0
+  },
+  {
+   "w": "biramam.",
+   "s": 31.0,
+   "e": 31.34
+  },
+  {
+   "w": "Uzumda",
+   "s": 31.44,
+   "e": 32.34
+  },
+  {
+   "w": "torti",
+   "s": 32.34,
+   "e": 33.14
+  },
+  {
+   "w": "adam,",
+   "s": 33.14,
+   "e": 33.42
+  },
+  {
+   "w": "yirmati",
+   "s": 33.82,
+   "e": 34.4
+  },
+  {
+   "w": "adamni",
+   "s": 34.4,
+   "e": 35.16
+  },
+  {
+   "w": "ikini",
+   "s": 35.16,
+   "e": 35.44
+  },
+  {
+   "w": "qilib",
+   "s": 35.44,
+   "e": 35.76
+  },
+  {
+   "w": "kemoxti.",
+   "s": 35.76,
+   "e": 36.26
+  },
+  {
+   "w": "Albatda",
+   "s": 36.36,
+   "e": 37.38
+  },
+  {
+   "w": "kili",
+   "s": 37.38,
+   "e": 37.76
+  },
+  {
+   "w": "cali",
+   "s": 37.76,
+   "e": 38.64
+  },
+  {
+   "w": "sana",
+   "s": 38.64,
+   "e": 39.2
+  },
+  {
+   "w": "qeklangan",
+   "s": 39.2,
+   "e": 39.86
+  },
+  {
+   "w": "hamamani",
+   "s": 39.86,
+   "e": 40.7
+  },
+  {
+   "w": "qitib",
+   "s": 40.7,
+   "e": 40.84
+  },
+  {
+   "w": "qolamam.",
+   "s": 40.84,
+   "e": 41.14
+  }
+ ]
+}

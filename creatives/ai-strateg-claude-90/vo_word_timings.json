@@ -1,0 +1,496 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 4.32,
+   "text": "Odamlarini 90%-i Cloud-tan notogri faydalanidi."
+  },
+  {
+   "start": 4.62,
+   "end": 7.88,
+   "text": "Nimagin, siz fakat Cloud-chattan faydalanasiz,"
+  },
+  {
+   "start": 7.88,
+   "end": 12.1,
+   "text": "likin Cloud-proyekt, Cloud-koddi e-xodimlan yaratiq,"
+  },
+  {
+   "start": 12.1,
+   "end": 14.94,
+   "text": "bu orqali pulizdi tecaz munkilligini bilmisiz."
+  },
+  {
+   "start": 15.1,
+   "end": 19.74,
+   "text": "Mani ozim, torta xodimin bilan, yirmata xodimin ishini qilib keliyatmiz,"
+  },
+  {
+   "start": 19.82,
+   "end": 23.5,
+   "text": "va bu orqali vaq, va pulini ekonom qiliyatmiz."
+  },
+  {
+   "start": 23.5,
+   "end": 25.0,
+   "text": "Ekonomikil yapmiz."
+  },
+  {
+   "start": 25.74,
+   "end": 34.44,
+   "text": "Agar sizgi ushbu mağzu qızıl boli digan bozir, yakın kullarda man offline tadbir qil yapman."
+  },
+  {
+   "start": 34.68,
+   "end": 42.96,
+   "text": "Albatda qoşilin, uyirdi qanday qilib, hazırdi aktual boğatgan mamali va yengilikla nasilagi ayitbiraman"
+  },
+  {
+   "start": 42.96,
+   "end": 46.48,
+   "text": "va sunintilikni toğri isyatisini organib olesiz."
+  },
+  {
+   "start": 47.34,
+   "end": 49.54,
+   "text": "Cahillar sonu qegirlayngan, albatda kelin."
+  }
+ ],
+ "words": [
+  {
+   "w": "Odamlarini",
+   "s": 0.0,
+   "e": 0.98
+  },
+  {
+   "w": "90",
+   "s": 0.98,
+   "e": 1.32
+  },
+  {
+   "w": "%",
+   "s": 1.32,
+   "e": 1.88
+  },
+  {
+   "w": "-i",
+   "s": 1.88,
+   "e": 2.18
+  },
+  {
+   "w": "Cloud",
+   "s": 2.18,
+   "e": 2.44
+  },
+  {
+   "w": "-tan",
+   "s": 2.44,
+   "e": 2.74
+  },
+  {
+   "w": "notogri",
+   "s": 2.74,
+   "e": 3.54
+  },
+  {
+   "w": "faydalanidi.",
+   "s": 3.54,
+   "e": 4.32
+  },
+  {
+   "w": "Nimagin,",
+   "s": 4.62,
+   "e": 5.42
+  },
+  {
+   "w": "siz",
+   "s": 5.44,
+   "e": 5.76
+  },
+  {
+   "w": "fakat",
+   "s": 5.76,
+   "e": 6.22
+  },
+  {
+   "w": "Cloud",
+   "s": 6.22,
+   "e": 6.52
+  },
+  {
+   "w": "-chattan",
+   "s": 6.52,
+   "e": 6.94
+  },
+  {
+   "w": "faydalanasiz,",
+   "s": 6.94,
+   "e": 7.88
+  },
+  {
+   "w": "likin",
+   "s": 7.88,
+   "e": 8.18
+  },
+  {
+   "w": "Cloud",
+   "s": 8.18,
+   "e": 8.4
+  },
+  {
+   "w": "-proyekt,",
+   "s": 8.4,
+   "e": 9.14
+  },
+  {
+   "w": "Cloud",
+   "s": 9.26,
+   "e": 9.7
+  },
+  {
+   "w": "-koddi",
+   "s": 9.7,
+   "e": 10.4
+  },
+  {
+   "w": "e",
+   "s": 10.4,
+   "e": 10.68
+  },
+  {
+   "w": "-xodimlan",
+   "s": 10.68,
+   "e": 11.38
+  },
+  {
+   "w": "yaratiq,",
+   "s": 11.38,
+   "e": 12.1
+  },
+  {
+   "w": "bu",
+   "s": 12.1,
+   "e": 12.54
+  },
+  {
+   "w": "orqali",
+   "s": 12.54,
+   "e": 12.98
+  },
+  {
+   "w": "pulizdi",
+   "s": 12.98,
+   "e": 13.6
+  },
+  {
+   "w": "tecaz",
+   "s": 13.6,
+   "e": 14.0
+  },
+  {
+   "w": "munkilligini",
+   "s": 14.0,
+   "e": 14.5
+  },
+  {
+   "w": "bilmisiz.",
+   "s": 14.5,
+   "e": 14.94
+  },
+  {
+   "w": "Mani",
+   "s": 15.1,
+   "e": 15.72
+  },
+  {
+   "w": "ozim,",
+   "s": 15.72,
+   "e": 16.12
+  },
+  {
+   "w": "torta",
+   "s": 16.14,
+   "e": 16.58
+  },
+  {
+   "w": "xodimin",
+   "s": 16.58,
+   "e": 17.1
+  },
+  {
+   "w": "bilan,",
+   "s": 17.1,
+   "e": 17.38
+  },
+  {
+   "w": "yirmata",
+   "s": 17.4,
+   "e": 18.02
+  },
+  {
+   "w": "xodimin",
+   "s": 18.02,
+   "e": 18.5
+  },
+  {
+   "w": "ishini",
+   "s": 18.5,
+   "e": 18.76
+  },
+  {
+   "w": "qilib",
+   "s": 18.76,
+   "e": 19.04
+  },
+  {
+   "w": "keliyatmiz,",
+   "s": 19.04,
+   "e": 19.74
+  },
+  {
+   "w": "va",
+   "s": 19.82,
+   "e": 20.2
+  },
+  {
+   "w": "bu",
+   "s": 20.2,
+   "e": 20.38
+  },
+  {
+   "w": "orqali",
+   "s": 20.38,
+   "e": 20.82
+  },
+  {
+   "w": "vaq,",
+   "s": 20.82,
+   "e": 21.42
+  },
+  {
+   "w": "va",
+   "s": 21.54,
+   "e": 21.94
+  },
+  {
+   "w": "pulini",
+   "s": 21.94,
+   "e": 22.24
+  },
+  {
+   "w": "ekonom",
+   "s": 22.24,
+   "e": 22.62
+  },
+  {
+   "w": "qiliyatmiz.",
+   "s": 22.62,
+   "e": 23.5
+  },
+  {
+   "w": "Ekonomikil",
+   "s": 23.5,
+   "e": 24.68
+  },
+  {
+   "w": "yapmiz.",
+   "s": 24.68,
+   "e": 25.0
+  },
+  {
+   "w": "Agar",
+   "s": 25.52,
+   "e": 25.96
+  },
+  {
+   "w": "sizgi",
+   "s": 25.96,
+   "e": 26.3
+  },
+  {
+   "w": "ushbu",
+   "s": 26.3,
+   "e": 28.18
+  },
+  {
+   "w": "mağzu",
+   "s": 28.18,
+   "e": 30.34
+  },
+  {
+   "w": "qızıl",
+   "s": 30.34,
+   "e": 30.76
+  },
+  {
+   "w": "boli",
+   "s": 30.76,
+   "e": 30.96
+  },
+  {
+   "w": "digan",
+   "s": 30.96,
+   "e": 31.24
+  },
+  {
+   "w": "bozir,",
+   "s": 31.24,
+   "e": 31.64
+  },
+  {
+   "w": "yakın",
+   "s": 31.68,
+   "e": 32.32
+  },
+  {
+   "w": "kullarda",
+   "s": 32.32,
+   "e": 32.74
+  },
+  {
+   "w": "man",
+   "s": 32.74,
+   "e": 33.12
+  },
+  {
+   "w": "offline",
+   "s": 33.12,
+   "e": 33.48
+  },
+  {
+   "w": "tadbir",
+   "s": 33.48,
+   "e": 34.0
+  },
+  {
+   "w": "qil",
+   "s": 34.0,
+   "e": 34.18
+  },
+  {
+   "w": "yapman.",
+   "s": 34.18,
+   "e": 34.44
+  },
+  {
+   "w": "Albatda",
+   "s": 34.68,
+   "e": 35.56
+  },
+  {
+   "w": "qoşilin,",
+   "s": 35.56,
+   "e": 36.14
+  },
+  {
+   "w": "uyirdi",
+   "s": 36.22,
+   "e": 36.96
+  },
+  {
+   "w": "qanday",
+   "s": 36.96,
+   "e": 37.42
+  },
+  {
+   "w": "qilib,",
+   "s": 37.42,
+   "e": 37.84
+  },
+  {
+   "w": "hazırdi",
+   "s": 37.84,
+   "e": 38.62
+  },
+  {
+   "w": "aktual",
+   "s": 38.62,
+   "e": 39.24
+  },
+  {
+   "w": "boğatgan",
+   "s": 39.24,
+   "e": 39.64
+  },
+  {
+   "w": "mamali",
+   "s": 39.64,
+   "e": 40.4
+  },
+  {
+   "w": "va",
+   "s": 40.4,
+   "e": 40.76
+  },
+  {
+   "w": "yengilikla",
+   "s": 40.76,
+   "e": 41.86
+  },
+  {
+   "w": "nasilagi",
+   "s": 41.86,
+   "e": 42.34
+  },
+  {
+   "w": "ayitbiraman",
+   "s": 42.34,
+   "e": 42.96
+  },
+  {
+   "w": "va",
+   "s": 42.96,
+   "e": 43.48
+  },
+  {
+   "w": "sunintilikni",
+   "s": 43.48,
+   "e": 44.26
+  },
+  {
+   "w": "toğri",
+   "s": 44.26,
+   "e": 44.96
+  },
+  {
+   "w": "isyatisini",
+   "s": 44.96,
+   "e": 45.56
+  },
+  {
+   "w": "organib",
+   "s": 45.56,
+   "e": 46.08
+  },
+  {
+   "w": "olesiz.",
+   "s": 46.08,
+   "e": 46.48
+  },
+  {
+   "w": "Cahillar",
+   "s": 47.22,
+   "e": 47.66
+  },
+  {
+   "w": "sonu",
+   "s": 47.66,
+   "e": 48.0
+  },
+  {
+   "w": "qegirlayngan,",
+   "s": 48.0,
+   "e": 48.64
+  },
+  {
+   "w": "albatda",
+   "s": 48.72,
+   "e": 49.34
+  },
+  {
+   "w": "kelin.",
+   "s": 49.34,
+   "e": 49.54
+  }
+ ]
+}

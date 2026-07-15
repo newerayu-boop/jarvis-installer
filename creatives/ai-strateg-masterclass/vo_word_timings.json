@@ -1,0 +1,356 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 9.1,
+   "text": "Bilaman suni intilikke qizi qaziz, chalcipiti, cloud, birni madillani qozsiz, lekin baribir siz qoqilagandi naticya ololmayabsiz."
+  },
+  {
+   "start": 9.88,
+   "end": 18.08,
+   "text": "Man yakim kullardir yana masterclass qiliyatman, bilaman otkansalbar qatnash olmagandiz, bu ikincisi manasizgi yangi imkonyad."
+  },
+  {
+   "start": 18.08,
+   "end": 31.14,
+   "text": "Albatda kilin, offline boladi, u yirda man qanday qilib cloud orqali uziske ea hodamdan yaratib, bu orqali pul va vaxtingizdi tecahsini kursisi biraman."
+  },
+  {
+   "start": 31.3,
+   "end": 37.86,
+   "text": "Hamas amaliyyatda boladi, albatdasini kutaman, joylar sonu qegirilanya atiki yusta joy qolga."
+  }
+ ],
+ "words": [
+  {
+   "w": "Bilaman",
+   "s": 0.0,
+   "e": 0.54
+  },
+  {
+   "w": "suni",
+   "s": 0.54,
+   "e": 0.92
+  },
+  {
+   "w": "intilikke",
+   "s": 0.92,
+   "e": 1.48
+  },
+  {
+   "w": "qizi",
+   "s": 1.48,
+   "e": 1.78
+  },
+  {
+   "w": "qaziz,",
+   "s": 1.78,
+   "e": 2.16
+  },
+  {
+   "w": "chalcipiti,",
+   "s": 2.26,
+   "e": 3.14
+  },
+  {
+   "w": "cloud,",
+   "s": 3.36,
+   "e": 3.76
+  },
+  {
+   "w": "birni",
+   "s": 3.96,
+   "e": 4.26
+  },
+  {
+   "w": "madillani",
+   "s": 4.26,
+   "e": 4.72
+  },
+  {
+   "w": "qozsiz,",
+   "s": 4.72,
+   "e": 5.34
+  },
+  {
+   "w": "lekin",
+   "s": 5.5,
+   "e": 6.02
+  },
+  {
+   "w": "baribir",
+   "s": 6.02,
+   "e": 6.82
+  },
+  {
+   "w": "siz",
+   "s": 6.82,
+   "e": 7.14
+  },
+  {
+   "w": "qoqilagandi",
+   "s": 7.14,
+   "e": 7.82
+  },
+  {
+   "w": "naticya",
+   "s": 7.82,
+   "e": 8.36
+  },
+  {
+   "w": "ololmayabsiz.",
+   "s": 8.36,
+   "e": 9.1
+  },
+  {
+   "w": "Man",
+   "s": 9.8,
+   "e": 10.32
+  },
+  {
+   "w": "yakim",
+   "s": 10.32,
+   "e": 10.64
+  },
+  {
+   "w": "kullardir",
+   "s": 10.64,
+   "e": 11.18
+  },
+  {
+   "w": "yana",
+   "s": 11.18,
+   "e": 11.72
+  },
+  {
+   "w": "masterclass",
+   "s": 11.72,
+   "e": 12.32
+  },
+  {
+   "w": "qiliyatman,",
+   "s": 12.32,
+   "e": 12.86
+  },
+  {
+   "w": "bilaman",
+   "s": 13.0,
+   "e": 13.58
+  },
+  {
+   "w": "otkansalbar",
+   "s": 13.58,
+   "e": 14.24
+  },
+  {
+   "w": "qatnash",
+   "s": 14.24,
+   "e": 14.56
+  },
+  {
+   "w": "olmagandiz,",
+   "s": 14.56,
+   "e": 15.28
+  },
+  {
+   "w": "bu",
+   "s": 15.38,
+   "e": 15.62
+  },
+  {
+   "w": "ikincisi",
+   "s": 15.62,
+   "e": 16.26
+  },
+  {
+   "w": "manasizgi",
+   "s": 16.26,
+   "e": 17.32
+  },
+  {
+   "w": "yangi",
+   "s": 17.32,
+   "e": 17.56
+  },
+  {
+   "w": "imkonyad.",
+   "s": 17.56,
+   "e": 18.08
+  },
+  {
+   "w": "Albatda",
+   "s": 18.08,
+   "e": 19.42
+  },
+  {
+   "w": "kilin,",
+   "s": 19.42,
+   "e": 19.84
+  },
+  {
+   "w": "offline",
+   "s": 19.94,
+   "e": 20.32
+  },
+  {
+   "w": "boladi,",
+   "s": 20.32,
+   "e": 20.9
+  },
+  {
+   "w": "u",
+   "s": 21.0,
+   "e": 21.44
+  },
+  {
+   "w": "yirda",
+   "s": 21.44,
+   "e": 21.88
+  },
+  {
+   "w": "man",
+   "s": 21.88,
+   "e": 22.06
+  },
+  {
+   "w": "qanday",
+   "s": 22.06,
+   "e": 22.6
+  },
+  {
+   "w": "qilib",
+   "s": 22.6,
+   "e": 23.02
+  },
+  {
+   "w": "cloud",
+   "s": 23.02,
+   "e": 23.54
+  },
+  {
+   "w": "orqali",
+   "s": 23.54,
+   "e": 24.28
+  },
+  {
+   "w": "uziske",
+   "s": 24.28,
+   "e": 25.3
+  },
+  {
+   "w": "ea",
+   "s": 25.3,
+   "e": 25.62
+  },
+  {
+   "w": "hodamdan",
+   "s": 25.62,
+   "e": 26.18
+  },
+  {
+   "w": "yaratib,",
+   "s": 26.18,
+   "e": 26.88
+  },
+  {
+   "w": "bu",
+   "s": 26.9,
+   "e": 27.44
+  },
+  {
+   "w": "orqali",
+   "s": 27.44,
+   "e": 27.88
+  },
+  {
+   "w": "pul",
+   "s": 27.88,
+   "e": 28.3
+  },
+  {
+   "w": "va",
+   "s": 28.3,
+   "e": 28.9
+  },
+  {
+   "w": "vaxtingizdi",
+   "s": 28.9,
+   "e": 29.66
+  },
+  {
+   "w": "tecahsini",
+   "s": 29.66,
+   "e": 30.26
+  },
+  {
+   "w": "kursisi",
+   "s": 30.26,
+   "e": 30.72
+  },
+  {
+   "w": "biraman.",
+   "s": 30.72,
+   "e": 31.14
+  },
+  {
+   "w": "Hamas",
+   "s": 31.3,
+   "e": 32.08
+  },
+  {
+   "w": "amaliyyatda",
+   "s": 32.08,
+   "e": 32.64
+  },
+  {
+   "w": "boladi,",
+   "s": 32.64,
+   "e": 33.02
+  },
+  {
+   "w": "albatdasini",
+   "s": 33.12,
+   "e": 34.24
+  },
+  {
+   "w": "kutaman,",
+   "s": 34.24,
+   "e": 34.62
+  },
+  {
+   "w": "joylar",
+   "s": 34.86,
+   "e": 35.44
+  },
+  {
+   "w": "sonu",
+   "s": 35.44,
+   "e": 35.74
+  },
+  {
+   "w": "qegirilanya",
+   "s": 35.74,
+   "e": 36.32
+  },
+  {
+   "w": "atiki",
+   "s": 36.32,
+   "e": 36.96
+  },
+  {
+   "w": "yusta",
+   "s": 36.96,
+   "e": 37.3
+  },
+  {
+   "w": "joy",
+   "s": 37.3,
+   "e": 37.54
+  },
+  {
+   "w": "qolga.",
+   "s": 37.54,
+   "e": 37.86
+  }
+ ]
+}
