@@ -1,0 +1,38 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Unbounded Bold,58,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,40,40,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:02.80,0:00:06.40,Sub,,0,0,0,,{\an5\bord0\shad0\fs58\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}PRODYUSER, EKSPERT,\NMARKETOLOG BO'LSANGIZ…
+Dialogue: 1,0:00:02.80,0:00:06.40,Sub,,0,0,0,,{\an5\bord0\shad0\fs58\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}PRODYUSER, EKSPERT,\NMARKETOLOG BO'LSANGIZ…
+Dialogue: 0,0:00:06.85,0:00:11.20,Sub,,0,0,0,,{\an5\bord0\shad0\fs56\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}O'ZBEKISTON BOZORIDA\NKADRLAR NARXI — JUDA BALAND
+Dialogue: 1,0:00:06.85,0:00:11.20,Sub,,0,0,0,,{\an5\bord0\shad0\fs56\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}O'ZBEKISTON BOZORIDA\NKADRLAR NARXI — {\1c&H61A9C9&}JUDA BALAND{\1c&HFFFFFF&}
+Dialogue: 0,0:00:15.85,0:00:19.10,Sub,,0,0,0,,{\an5\bord0\shad0\fs58\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}ROSSIYA JAMOASIDA\NISHLAGANMAN — BILAMAN
+Dialogue: 1,0:00:15.85,0:00:19.10,Sub,,0,0,0,,{\an5\bord0\shad0\fs58\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}ROSSIYA JAMOASIDA\NISHLAGANMAN — {\1c&H61A9C9&}BILAMAN{\1c&HFFFFFF&}
+Dialogue: 0,0:00:19.40,0:00:24.20,Sub,,0,0,0,,{\an5\bord0\shad0\fs60\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}SIFATSIZ KADRLARDAN\NCHARCHADIM
+Dialogue: 1,0:00:19.40,0:00:24.20,Sub,,0,0,0,,{\an5\bord0\shad0\fs60\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}{\1c&H61A9C9&}SIFATSIZ KADRLARDAN\NCHARCHADIM{\1c&HFFFFFF&}
+Dialogue: 0,0:00:24.40,0:00:28.00,Sub,,0,0,0,,{\an5\bord0\shad0\fs60\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}O'ZIMGA AI-AGENTLAR\NYARATDIM
+Dialogue: 1,0:00:24.40,0:00:28.00,Sub,,0,0,0,,{\an5\bord0\shad0\fs60\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}{\1c&H61A9C9&}O'ZIMGA AI-AGENTLAR\NYARATDIM{\1c&HFFFFFF&}
+Dialogue: 0,0:00:28.35,0:00:31.40,Sub,,0,0,0,,{\an5\bord0\shad0\fs58\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}MANA — MENING\NAI-AGENT JAMOAM
+Dialogue: 1,0:00:28.35,0:00:31.40,Sub,,0,0,0,,{\an5\bord0\shad0\fs58\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}MANA — MENING\N{\1c&H61A9C9&}AI-AGENT JAMOAM{\1c&HFFFFFF&}
+Dialogue: 0,0:00:31.70,0:00:35.70,Sub,,0,0,0,,{\an5\bord0\shad0\fs52\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}MARKETOLOG · PRODYUSER ·\NDIZAYNER — HAMMASI AI
+Dialogue: 1,0:00:31.70,0:00:35.70,Sub,,0,0,0,,{\an5\bord0\shad0\fs52\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}MARKETOLOG · PRODYUSER ·\NDIZAYNER — {\1c&H61A9C9&}HAMMASI AI{\1c&HFFFFFF&}
+Dialogue: 0,0:00:35.90,0:00:38.75,Sub,,0,0,0,,{\an5\bord0\shad0\fs58\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}KO'PCHILIGINI\NBOSIB O'TDIM
+Dialogue: 1,0:00:35.90,0:00:38.75,Sub,,0,0,0,,{\an5\bord0\shad0\fs58\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}KO'PCHILIGINI\NBOSIB O'TDIM
+Dialogue: 0,0:00:43.45,0:00:46.00,Sub,,0,0,0,,{\an5\bord0\shad0\fs56\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}MEN — REALITY QILAMAN\N20 KUN ICHIDA
+Dialogue: 1,0:00:43.45,0:00:46.00,Sub,,0,0,0,,{\an5\bord0\shad0\fs56\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}MEN — {\1c&H61A9C9&}REALITY{\1c&HFFFFFF&} QILAMAN\N20 KUN ICHIDA
+Dialogue: 0,0:00:46.20,0:00:49.30,Sub,,0,0,0,,{\an5\bord0\shad0\fs56\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}ICHKARIDA HAR BIR\NJARAYON — OCHIQ
+Dialogue: 1,0:00:46.20,0:00:49.30,Sub,,0,0,0,,{\an5\bord0\shad0\fs56\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}ICHKARIDA HAR BIR\NJARAYON — {\1c&H61A9C9&}OCHIQ{\1c&HFFFFFF&}
+Dialogue: 0,0:00:49.55,0:00:54.30,Sub,,0,0,0,,{\an5\bord0\shad0\fs50\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}PROMPT · RAQAM · XATO —\NHAMMASINI OCHIQ BERAMAN
+Dialogue: 1,0:00:49.55,0:00:54.30,Sub,,0,0,0,,{\an5\bord0\shad0\fs50\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}PROMPT · RAQAM · XATO —\N{\1c&H61A9C9&}HAMMASINI OCHIQ BERAMAN{\1c&HFFFFFF&}
+Dialogue: 0,0:00:54.55,0:00:56.10,Sub,,0,0,0,,{\an5\bord0\shad0\fs62\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1212)\blur9\1c&H000000&\alpha&H26&}PASTDA — BATAFSIL
+Dialogue: 1,0:00:54.55,0:00:56.10,Sub,,0,0,0,,{\an5\bord0\shad0\fs62\fscx110\fscy110\t(0,110,\fscx100\fscy100)\fad(45,55)\pos(540,1205)}{\1c&H61A9C9&}PASTDA — BATAFSIL{\1c&HFFFFFF&}
