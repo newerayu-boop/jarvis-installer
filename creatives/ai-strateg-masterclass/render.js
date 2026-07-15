@@ -5,7 +5,8 @@ const fs = require('fs');
 (async () => {
   const mode = process.argv[2] || 'test';
   const outDir = process.argv[3] || 'frames';
-  const FPS = 30, DUR = 44.0;
+  const SPEED = parseFloat(process.env.SPEED || '1.0');
+  const FPS = 30, SCENE_DUR = 44.0, DUR = SCENE_DUR / SPEED;
   const sceneUrl = 'file://' + path.resolve(__dirname, 'scene.html');
 
   const browser = await chromium.launch({
@@ -35,7 +36,7 @@ const fs = require('fs');
     const N = Math.round(DUR * FPS);
     const t0 = Date.now();
     for (let i = 0; i < N; i++) {
-      const t = i / FPS;
+      const t = (i / FPS) * SPEED;   // scene-time; SPEED>1 => visuals+captions play faster
       await page.evaluate(async (tt) => await window.renderAt(tt), t);
       await page.screenshot({ path: path.resolve(__dirname, outDir, 'f_' + String(i).padStart(5,'0') + '.png') });
       if (i % 60 === 0) {
