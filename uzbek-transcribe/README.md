@@ -116,6 +116,26 @@ python3 transcribe.py "video.mp4" --no-diarize
 
 ---
 
+## Быстрый вариант для CPU (без видеокарты): `transcribe_fast.py`
+
+Если у тебя нет GPU (обычный ПК/ноутбук), обычный `transcribe.py` на CPU идёт
+медленно. Для этого есть `transcribe_fast.py` — он конвертирует ту же модель в
+формат CTranslate2 (int8) и работает в разы быстрее. Именно этим скриптом было
+обработано видео `yusuf sotuv`.
+
+```bash
+pip install faster-whisper ctranslate2 transformers torch gdown
+# для определения спикеров без токена HuggingFace:
+pip install resemblyzer scikit-learn librosa
+
+python3 transcribe_fast.py "video.mp4"                       # только текст+таймкоды
+python3 transcribe_fast.py "video.mp4" --diarize             # + определение спикеров (без HF-токена)
+python3 transcribe_fast.py "video.mp4" --name Yusuf          # если один говорящий — подписать именем
+```
+
+Определение спикеров тут работает **без токена HuggingFace** (через resemblyzer
++ кластеризацию), в отличие от `transcribe.py` (там pyannote и нужен токен).
+
 ## Частые вопросы
 
 - **Долго качает при первом запуске** — модель ~1.5 ГБ, качается один раз, потом
