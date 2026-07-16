@@ -18,6 +18,8 @@
 
 ## Установка (один раз)
 
+### macOS / Linux
+
 ```bash
 cd uzbek-transcribe
 bash setup.sh
@@ -25,6 +27,25 @@ bash setup.sh
 
 Скрипт поставит `ffmpeg` (через Homebrew, если его нет), создаст окружение
 `.venv` и установит зависимости.
+
+### Windows
+
+1. Установи **Python 3.11** с https://www.python.org/downloads/ — при установке
+   обязательно поставь галочку **«Add Python to PATH»**.
+2. Установи **ffmpeg**: скачай `ffmpeg-release-essentials.zip` с
+   https://www.gyan.dev/ffmpeg/builds/, распакуй, и добавь папку `bin` в
+   переменную среды `PATH`.
+3. В папке `uzbek-transcribe` запусти двойным кликом `setup_windows.bat`
+   (или в командной строке: `setup_windows.bat`).
+4. Запуск транскрибации:
+   ```bat
+   .venv\Scripts\activate.bat
+   python transcribe.py "C:\Users\ТВОЁ_ИМЯ\Downloads\yusuf sotuv.mp4"
+   ```
+
+> На Windows определение спикеров (диаризация) работает так же, как на Mac —
+> нужен токен HuggingFace (см. ниже). Если у тебя видеокарта NVIDIA, обработка
+> пойдёт быстро; без неё — на CPU (медленнее, но работает).
 
 ---
 
