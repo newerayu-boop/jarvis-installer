@@ -72,7 +72,7 @@ function normalStub({ name, number, tarif }) {
 // Invite stub: personal invitation, VIP, no number, optional "invited by".
 function inviteStub({ name, invitedBy }) {
   const e = config.event;
-  const headline = name && name.length ? name : 'Aynan Sizga!';
+  const headline = name && name.length ? name : 'Mentorlik 1.0';
   const hSize = nameSize(headline);
   return h('div', { display: 'flex', flexDirection: 'column', padding: '52px 70px 56px', background: '#141414', flexGrow: 1 },
     h('div', { display: 'flex', fontWeight: 700, fontSize: 24, letterSpacing: 4, color: '#E5B86F' }, 'VIP TAKLIFNOMA'),
