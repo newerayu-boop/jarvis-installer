@@ -1,0 +1,12 @@
+# Рабочие артефакты и большие бинарники — не коммитим
+work/
+.venv/
+*.wav
+*.mp4
+*.mov
+*.mkv
+*.mp3
+*.m4a
+rubaistt-ct2/
+__pycache__/
+*.pyc
