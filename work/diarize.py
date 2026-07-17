@@ -16,25 +16,9 @@ assert sr == SR, sr
 N = len(audio)
 
 def build_units():
-    units = []
-    for s in seg:
-        words = s.get("words") or []
-        if not words:
-            units.append({"start": s["start"], "end": s["end"], "text": s["text"]})
-            continue
-        cur = [words[0]]
-        for w in words[1:]:
-            gap = w["start"] - cur[-1]["end"]
-            dur = w["end"] - cur[0]["start"]
-            if gap > GAP or dur > MAX_UNIT:
-                units.append({"start": cur[0]["start"], "end": cur[-1]["end"],
-                              "text": "".join(x["word"] for x in cur).strip()})
-                cur = [w]
-            else:
-                cur.append(w)
-        units.append({"start": cur[0]["start"], "end": cur[-1]["end"],
-                      "text": "".join(x["word"] for x in cur).strip()})
-    return [u for u in units if u["text"]]
+    # short VAD-driven segments are already turn-granular; use them directly
+    return [{"start": s["start"], "end": s["end"], "text": s["text"]}
+            for s in seg if s["text"].strip()]
 
 units = build_units()
 print(f"{len(units)} units from {len(seg)} segments; elapsed {time.time()-t0:.0f}s", flush=True)
