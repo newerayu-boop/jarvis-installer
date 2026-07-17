@@ -5,9 +5,9 @@ SR = 16000
 MODEL_DIR = "ct2-rubaistt"
 AUDIO = "audio.wav"
 OUT = "segments.json"
-CHUNK = 420.0      # nominal chunk length (s)
+CHUNK = 300.0      # nominal chunk length (s)
 SEARCH = 6.0       # +/- window to snap cut to a quiet point (s)
-WORKERS = 4
+WORKERS = 2        # medium model ~3GB/worker; 2 keeps us under the 15GB cap
 
 t0 = time.time()
 
@@ -45,7 +45,7 @@ _model = None
 def init():
     global _model
     from faster_whisper import WhisperModel
-    _model = WhisperModel(MODEL_DIR, device="cpu", compute_type="int8", cpu_threads=1)
+    _model = WhisperModel(MODEL_DIR, device="cpu", compute_type="int8", cpu_threads=2)
 
 def work(chunk):
     idx, start, end = chunk
