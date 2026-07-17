@@ -1,0 +1,12 @@
+# heavy / generated artifacts — do not commit
+video.mp4
+*.wav
+*.bin
+ct2-rubaistt/
+tok_tmp/
+ecapa/
+pretrained_models/
+__pycache__/
+*.log
+segments.json
+diarized.json
