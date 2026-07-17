@@ -5,10 +5,12 @@ SR = 16000
 MODEL_DIR = "ct2-rubaistt"
 AUDIO = "audio.wav"
 OUT = "segments.json"
-CHUNK = 300.0      # nominal chunk length (s)
-SEARCH = 6.0       # +/- window to snap cut to a quiet point (s)
-WORKERS = 2        # medium model ~3GB/worker; 2 keeps us under the 15GB cap
+SEGDIR = "segs"          # per-chunk results (resume-safe)
+CHUNK = 300.0            # nominal chunk length (s)
+SEARCH = 6.0            # +/- window to snap cut to a quiet point (s)
+WORKERS = 2             # medium int8 model; 2 workers keeps peak RAM safe
 
+os.makedirs(SEGDIR, exist_ok=True)
 t0 = time.time()
 
 # ---- find cut points at low-energy (silence) near nominal boundaries ----
@@ -19,18 +21,16 @@ assert sr == SR
 N = len(audio); dur = N / SR
 hop = int(0.02 * SR)
 frames = np.abs(audio[:len(audio)//hop*hop]).reshape(-1, hop).mean(axis=1)
+del audio  # free memory in the parent; workers re-read their slice from disk
 
 def snap(t):
-    center = int(t / 0.02)
-    w = int(SEARCH / 0.02)
+    center = int(t / 0.02); w = int(SEARCH / 0.02)
     lo = max(0, center - w); hi = min(len(frames), center + w)
     if hi <= lo:
         return t
-    idx = lo + int(np.argmin(frames[lo:hi]))
-    return idx * 0.02
+    return (lo + int(np.argmin(frames[lo:hi]))) * 0.02
 
-cuts = [0.0]
-tt = CHUNK
+cuts = [0.0]; tt = CHUNK
 while tt < dur - SEARCH:
     c = snap(tt)
     if c > cuts[-1] + 30:
@@ -38,8 +38,9 @@ while tt < dur - SEARCH:
     tt += CHUNK
 cuts.append(dur)
 chunks = [(i, cuts[i], cuts[i+1]) for i in range(len(cuts)-1)]
-print(f"duration={dur:.0f}s -> {len(chunks)} chunks: " +
-      ", ".join(f"[{a:.0f}-{b:.0f}]" for _, a, b in chunks), flush=True)
+todo = [c for c in chunks if not os.path.exists(f"{SEGDIR}/seg_{c[0]:02d}.json")]
+print(f"duration={dur:.0f}s -> {len(chunks)} chunks, {len(todo)} to do "
+      f"({len(chunks)-len(todo)} already done)", flush=True)
 
 _model = None
 def init():
@@ -58,22 +59,23 @@ def work(chunk):
         vad_parameters=dict(min_silence_duration_ms=300,
                             max_speech_duration_s=15, speech_pad_ms=100),
         word_timestamps=False, condition_on_previous_text=False)
-    out = []
-    for s in segs:
-        out.append({"start": s.start + start, "end": s.end + start,
-                    "text": s.text.strip(), "words": []})
-    return idx, out
+    out = [{"start": s.start + start, "end": s.end + start, "text": s.text.strip()}
+           for s in segs if s.text.strip()]
+    with open(f"{SEGDIR}/seg_{idx:02d}.json", "w") as f:
+        json.dump(out, f, ensure_ascii=False)
+    return idx, len(out)
 
-results = {}
-with ProcessPoolExecutor(max_workers=WORKERS, initializer=init) as ex:
-    for idx, out in ex.map(work, chunks):
-        results[idx] = out
-        print(f"  chunk {idx} done ({len(out)} segs)  elapsed={time.time()-t0:.0f}s", flush=True)
+if todo:
+    with ProcessPoolExecutor(max_workers=WORKERS, initializer=init) as ex:
+        for idx, n in ex.map(work, todo):
+            print(f"  chunk {idx} done ({n} segs) saved  elapsed={time.time()-t0:.0f}s", flush=True)
 
+# ---- merge all per-chunk results ----
 data = []
 for i in range(len(chunks)):
-    data.extend(results.get(i, []))
+    p = f"{SEGDIR}/seg_{i:02d}.json"
+    if os.path.exists(p):
+        data.extend(json.load(open(p)))
 data.sort(key=lambda x: x["start"])
-
 json.dump({"segments": data, "duration": dur}, open(OUT, "w"), ensure_ascii=False)
-print(f"DONE segs={len(data)} elapsed={time.time()-t0:.0f}s -> {OUT}", flush=True)
+print(f"DONE segs={len(data)} merged  elapsed={time.time()-t0:.0f}s -> {OUT}", flush=True)

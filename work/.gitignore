@@ -10,3 +10,8 @@ __pycache__/
 *.log
 segments.json
 diarized.json
+
+# diarization intermediates
+embeddings.npy
+units.json
+segs/

@@ -6,7 +6,19 @@ if len(sys.argv) > 2:
     NAMES = {0: sys.argv[1], 1: sys.argv[2]}
 
 d = json.load(open("diarized.json"))
-turns, units = d["turns"], d["units"]
+units = d["units"]
+
+# group consecutive same-speaker units, but start a fresh timecoded block
+# every ~40s so timecodes stay frequent and paragraphs stay readable
+MAX_TURN = 40.0
+turns = []
+for u in units:
+    if (turns and turns[-1]["spk"] == u["spk"]
+            and u["start"] - turns[-1]["end"] < 1.5
+            and u["end"] - turns[-1]["start"] <= MAX_TURN):
+        turns[-1]["end"] = u["end"]; turns[-1]["text"] += " " + u["text"]
+    else:
+        turns.append(dict(u))
 
 def hms(t):
     t = max(0, int(round(t))); h = t // 3600; m = (t % 3600) // 60; s = t % 60
