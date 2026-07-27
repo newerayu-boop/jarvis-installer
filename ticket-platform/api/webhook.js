@@ -9,7 +9,7 @@
 // (SETUP_SECRET must be set in the Vercel environment.)
 
 const { renderTicketPng } = require('../lib/ticket');
-const { GREETING, NOT_UNDERSTOOD, VIP_NEEDS_NAME, DENIED, parseInput, caption, renderArgs } = require('../lib/messages');
+const { GREETING, NOT_UNDERSTOOD, DENIED, parseInput, caption, renderArgs } = require('../lib/messages');
 
 const TOKEN = process.env.BOT_TOKEN;
 const API = `https://api.telegram.org/bot${TOKEN}`;
@@ -75,10 +75,6 @@ module.exports = async (req, res) => {
     const parsed = parseInput(text);
     if (!parsed) {
       await sendMessage(chatId, NOT_UNDERSTOOD);
-      return res.status(200).end();
-    }
-    if (parsed.mode === 'vip' && !parsed.name) {
-      await sendMessage(chatId, VIP_NEEDS_NAME);
       return res.status(200).end();
     }
 

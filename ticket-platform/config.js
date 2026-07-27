@@ -6,11 +6,13 @@
 module.exports = {
   event: {
     badge:    'OFFLINE',
-    date:     '18-iyul',
-    time:     '14:00–18:00',
-    venue:    'M-Factor',
+    date:     '2-avgust',
+    time:     '14:00',
+    venue:    'Hyatt Regency',
+    entry:    '13:30',                       // kirish (eshiklar ochilishi)
     speaker:  'Yusufbay Kadirov',
     eventSub: 'AI OFFLINE TRENING · 1 KUNLIK MASTER KLASS',
+    footer:   'Bilet faqat 1 kishi uchun',   // stub tagidagi eslatma
   },
 
   // Default tarif when the seller doesn't specify one.

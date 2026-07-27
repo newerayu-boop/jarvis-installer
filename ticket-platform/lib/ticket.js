@@ -97,7 +97,32 @@ function inviteStub({ name, invitedBy }) {
   );
 }
 
-function buildTree({ name, number, tarif, invite, invitedBy }) {
+// Personal stub: name only — no number, no VIP. Shows venue, date, entry time
+// and a "1 person" note.
+function personalStub({ name }) {
+  const e = config.event, l = config.labels;
+  const nSize = nameSize(name);
+  return h('div', { display: 'flex', flexDirection: 'column', padding: '54px 70px 52px', background: '#141414', flexGrow: 1 },
+    h('div', { display: 'flex', fontWeight: 600, fontSize: 24, letterSpacing: 3, color: '#8c8c8c' }, l.attendee),
+    h('div', { display: 'flex', fontFamily: 'Montserrat', fontWeight: 800, fontSize: nSize, lineHeight: 1.06, marginTop: 12, color: 'transparent', backgroundImage: GOLD_GRAD, backgroundClip: 'text', maxWidth: MAX_NAME_W }, name),
+    h('div', { display: 'flex', marginTop: 44 },
+      h('div', { display: 'flex', flexGrow: 1, flexBasis: 0, marginRight: 24 }, labeledCell('MANZIL', e.venue, false)),
+      labeledCell('SANA', e.date, true),
+    ),
+    h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 44 },
+      brandBlock(),
+      h('div', { display: 'flex', flexDirection: 'column', alignItems: 'flex-end' },
+        h('div', { display: 'flex', fontSize: 22, letterSpacing: 2, color: '#8c8c8c' }, 'KIRISH'),
+        h('div', { display: 'flex', fontFamily: 'Montserrat', fontWeight: 900, fontSize: 72, color: '#E5B86F', lineHeight: 1, marginTop: 6 }, e.entry + ' dan'),
+      ),
+    ),
+    h('div', { display: 'flex', justifyContent: 'center', marginTop: 34 },
+      h('div', { display: 'flex', fontFamily: 'Manrope', fontWeight: 600, fontSize: 24, letterSpacing: 1, color: '#8c8c8c' }, e.footer),
+    ),
+  );
+}
+
+function buildTree({ name, number, tarif, invite, invitedBy, personal }) {
   const e = config.event, l = config.labels;
 
   return h('div', { display: 'flex', flexDirection: 'column', width: W, height: H, background: '#0e0e0e', borderRadius: 44, overflow: 'hidden', fontFamily: 'Manrope' },
@@ -122,7 +147,9 @@ function buildTree({ name, number, tarif, invite, invitedBy }) {
     // ── tear line ──
     h('div', { display: 'flex', width: 780, marginLeft: 60, marginRight: 60, borderTopWidth: 4, borderTopStyle: 'dashed', borderTopColor: 'rgba(229,184,111,0.55)', height: 0 }),
     // ── STUB ──
-    invite ? inviteStub({ name, invitedBy }) : normalStub({ name, number, tarif }),
+    personal ? personalStub({ name })
+      : invite ? inviteStub({ name, invitedBy })
+        : normalStub({ name, number, tarif }),
   );
 }
 
@@ -150,6 +177,7 @@ async function renderTicketPng(data) {
     tarif: data.tarif && String(data.tarif).trim(),
     invite: Boolean(data.invite),
     invitedBy: data.invitedBy && String(data.invitedBy).trim(),
+    personal: Boolean(data.personal),
   }), { width: W, height: H, fonts: fontSpec() });
   return new Resvg(svg, { fitTo: { mode: 'width', value: W } }).render().asPng();
 }
