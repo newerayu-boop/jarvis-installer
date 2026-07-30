@@ -15,3 +15,7 @@ diarized.json
 embeddings.npy
 units.json
 segs/
+
+# one-off personal voice-message transcript (delivered directly)
+transcript2.txt
+audio2.wav
