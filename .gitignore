@@ -1,0 +1,17 @@
+# ─── Секреты: никогда не коммитить ───────────────────────────
+jarvis.env
+*.env
+!*.env.example
+!.env.example
+*.key
+*.pem
+credentials/
+
+# ─── Мусор ───────────────────────────────────────────────────
+node_modules/
+*.log
+preview.png
+.DS_Store
+
+# ─── Отчёты QA: машинный файл не нужен в репозитории ─────────
+qa/report/findings.tsv
