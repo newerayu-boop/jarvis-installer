@@ -91,7 +91,10 @@ done
 # 2.7 Unit-тесты проекта
 if [ -d "$QA_ROOT/tests" ] && [ -n "$(find "$QA_ROOT/tests" -name '*.test.js' -print -quit)" ]; then
     printf "${C_D}  … запускаю unit-тесты${C_N}\n"
-    if out=$(cd "$PROJECT_ROOT" && node --test "$QA_ROOT/tests/**/*.test.js" 2>&1); then
+    # Файлы ищем через find, а не глобом: раскрытие ** зависит от оболочки
+    # и версии Node, и при неудаче тесты «проходят», не запустившись.
+    mapfile -t TEST_FILES < <(find "$QA_ROOT/tests" -name '*.test.js' | sort)
+    if out=$(cd "$PROJECT_ROOT" && node --test "${TEST_FILES[@]}" 2>&1); then
         pass "unit-тесты: $(printf '%s' "$out" | grep -E '^# (pass|fail)' | tr '\n' ' ')"
     else
         while IFS= read -r line; do
@@ -100,6 +103,6 @@ if [ -d "$QA_ROOT/tests" ] && [ -n "$(find "$QA_ROOT/tests" -name '*.test.js' -p
                 "$(printf '%s' "$out" | grep -A6 -F "$line" | head -c 400)" \
                 "Починить поведение или обновить тест, если оно изменилось намеренно."
         done < <(printf '%s' "$out" | grep -E '^not ok [0-9]+ - ' | sed -E 's/^not ok [0-9]+ - //' | head -20)
-        [ -z "$(printf '%s' "$out" | grep -E '^not ok ')" ] && fail_with MAJOR "unit-тесты" "Тесты завершились с ошибкой" "$(printf '%s' "$out" | tail -c 400)" "Запустить: node --test 'qa/tests/**/*.test.js'"
+        [ -z "$(printf '%s' "$out" | grep -E '^not ok ')" ] && fail_with MAJOR "unit-тесты" "Тесты завершились с ошибкой" "$(printf '%s' "$out" | tail -c 400)" "Запустить: node --test \$(find qa/tests -name '*.test.js')"
     fi
 fi

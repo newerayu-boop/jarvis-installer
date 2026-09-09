@@ -21,7 +21,20 @@ trap 'rm -rf "$SANDBOX"' EXIT
 
 # Вырезаем блок валидации конфига (всё до строки «Конфиг проверен»),
 # чтобы прогонять его без реальной установки пакетов.
-sed -n '1,/Конфиг проверен/p' "$INSTALLER" > "$SANDBOX/validate.sh"
+# Проверку на root убираем: она тестируется отдельно (сценарий 6), а здесь
+# мешает — иначе на CI, где сборка идёт не от root, скрипт выходил бы сразу
+# и все сценарии ниже «проходили» бы вхолостую.
+sed -n '1,/Конфиг проверен/p' "$INSTALLER" \
+    | grep -v 'EUID' > "$SANDBOX/validate.sh"
+
+# Страховка: если блок валидации вырезался пустым или всё равно выходит
+# раньше проверки конфига — сценарии ниже бессмысленны, и молчать об этом нельзя.
+if ! grep -q 'Конфиг проверен' "$SANDBOX/validate.sh"; then
+    fail_with MAJOR "qa/checks/50-student.sh" "Не удалось вырезать блок проверки конфига" \
+        "Симулятор ученика не может прогнать сценарии установщика и молча пропустил бы их." \
+        "Проверить, что в install.sh осталась строка ok \"Конфиг проверен\"."
+    return 0 2>/dev/null || exit 0
+fi
 
 # run_student <файл-конфига> → печатает то, что увидит ученик
 run_student() {
@@ -119,12 +132,13 @@ if [ -n "$PARSER" ]; then
         if (!r) console.log('NULL\t'+t+'\t'+why);
         else if (!/^[0-9]+\$/.test(r.number) || /[-,]\$/.test(r.name)) console.log('WEIRD\t'+t+'\t'+why+'\t'+JSON.stringify(r));
       }
-    " 2>&1)
+    " 2>/dev/null | grep -E "^(NULL|WEIRD)$(printf '\t')")
     if [ -z "$out" ]; then
         pass "сценарий: свободный ввод продавца разбирается корректно"
     else
         while IFS=$'\t' read -r kind text why got; do
-            [ -z "$kind" ] && continue
+            case "$kind" in NULL|WEIRD) ;; *) continue ;; esac
+            [ -z "$text" ] && continue
             if [ "$kind" = NULL ]; then
                 finding MAJOR "$PARSER" "Продавец напишет «$text» — бот ответит «не понял»" \
                     "Случай: $why. Формально ученик виноват, но писать он будет именно так, и придёт жаловаться вам." \

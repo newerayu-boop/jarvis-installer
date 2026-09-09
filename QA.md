@@ -91,7 +91,7 @@ qa/report/findings.tsv   ← машинный список (в git не попа
 ```
 qa/tests/<имя-продукта>/<что-проверяем>.test.js
 ```
-Обычный `node:test`, без библиотек. Запуск: `node --test 'qa/tests/**/*.test.js'`
+Обычный `node:test`, без библиотек. Запуск: `bash qa/run.sh node`
 
 Новый сценарий ошибки ученика — в `qa/checks/50-student.sh`.
 
