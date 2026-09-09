@@ -1,10 +1,17 @@
 name: QA — проверка перед выдачей ученикам
 
 on:
+  # На ветках проверку запускает pull_request, поэтому push ловим только
+  # для main — иначе на каждый коммит в PR запускалось бы два одинаковых прогона.
   push:
-    branches: ['**']
+    branches: [main]
   pull_request:
   workflow_dispatch:
+
+# Новый пуш отменяет ещё не закончившийся прогон по той же ветке.
+concurrency:
+  group: qa-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   qa:
