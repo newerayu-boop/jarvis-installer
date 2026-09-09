@@ -69,11 +69,13 @@ detect_stack() {
 
 # --- Список файлов проекта (без мусора) -----------------------
 project_files() {
+    # Собственный отчёт из выдачи исключаем: иначе проверки находят сами себя.
+    local skip="${QA_REPORT_DIR#$PROJECT_ROOT/}"
     if git -C "$PROJECT_ROOT" rev-parse --git-dir >/dev/null 2>&1; then
-        git -C "$PROJECT_ROOT" ls-files
+        git -C "$PROJECT_ROOT" ls-files | grep -v "^${skip}/"
     else
         (cd "$PROJECT_ROOT" && find . -type f \
             -not -path './.git/*' -not -path '*/node_modules/*' \
-            -not -path './qa/report/*' | sed 's|^\./||')
+            -not -path './qa/report/*' | sed 's|^\./||' | grep -v "^${skip}/")
     fi
 }

@@ -2,7 +2,7 @@
 # ══════════════════════════════════════════════════════════════
 #  QA RUN — один запуск = полная проверка продукта перед выдачей ученикам
 #
-#  Запуск:   bash qa/run.sh
+#  Запуск:   bash qa/run.sh [путь-к-папке] [группа]
 #  Результат: qa/report/BUGS.md  +  код выхода (0 = можно отдавать)
 #
 #  Коды выхода:
@@ -12,8 +12,20 @@
 set -uo pipefail
 
 QA_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$QA_ROOT/.." && pwd)"
-export QA_ROOT PROJECT_ROOT
+
+# Первый аргумент — путь к проверяемой папке, если это существующая папка.
+# Так одним и тем же раннером проверяется и свой репозиторий, и любой новый
+# продукт: bash qa/run.sh ~/Downloads/AI-компания-ДЕМО
+if [ -n "${1:-}" ] && [ -d "$1" ]; then
+    PROJECT_ROOT="$(cd "$1" && pwd)"; shift
+else
+    PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$QA_ROOT/.." && pwd)}"
+fi
+# Отчёт по чужой папке кладём рядом с ней, чтобы не затирать свой.
+if [ "$PROJECT_ROOT" != "$(cd "$QA_ROOT/.." && pwd)" ]; then
+    QA_REPORT_DIR="${QA_REPORT_DIR:-$PROJECT_ROOT/qa-отчёт}"
+fi
+export QA_ROOT PROJECT_ROOT QA_REPORT_DIR
 
 source "$QA_ROOT/lib/harness.sh"
 
