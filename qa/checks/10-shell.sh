@@ -20,6 +20,13 @@ for f in "${SCRIPTS[@]}"; do
     fi
 
     # 1.2 shellcheck, если установлен
+    if ! command -v shellcheck >/dev/null 2>&1; then
+        [ -z "${SHELLCHECK_WARNED:-}" ] && {
+            printf "${C_Y}  ⚠ shellcheck не установлен — часть проблем в .sh не будет найдена локально${C_N}\n"
+            printf "${C_D}    поставить: apt-get install -y shellcheck  ·  на GitHub он ставится сам${C_N}\n"
+            SHELLCHECK_WARNED=1
+        }
+    fi
     if command -v shellcheck >/dev/null 2>&1; then
         if out=$(shellcheck -S warning -f gcc "$p" 2>&1); then
             pass "$f — shellcheck"

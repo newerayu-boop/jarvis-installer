@@ -4,7 +4,10 @@ source "$QA_ROOT/lib/harness.sh"
 
 section "3. Инструкции для учеников (README)"
 
-mapfile -t DOCS < <(project_files | grep -E '\.md$' | grep -v '^qa/' | grep -v '^\.claude/' || true)
+# Документацию самой QA-системы не проверяем как инструкцию для ученика:
+# она адресована автору курса, а не новичку.
+mapfile -t DOCS < <(project_files | grep -E '\.md$' \
+    | grep -v '^qa/' | grep -v '^\.claude/' | grep -vx 'QA.md' || true)
 if [ ${#DOCS[@]} -eq 0 ]; then skip "нет .md файлов"; return 0 2>/dev/null || exit 0; fi
 
 ALL_FILES="$(project_files)"
