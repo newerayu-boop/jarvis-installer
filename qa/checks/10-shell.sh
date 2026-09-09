@@ -22,8 +22,9 @@ for f in "${SCRIPTS[@]}"; do
     # 1.2 shellcheck, если установлен
     if ! command -v shellcheck >/dev/null 2>&1; then
         [ -z "${SHELLCHECK_WARNED:-}" ] && {
-            printf "${C_Y}  ⚠ shellcheck не установлен — часть проблем в .sh не будет найдена локально${C_N}\n"
-            printf "${C_D}    поставить: apt-get install -y shellcheck  ·  на GitHub он ставится сам${C_N}\n"
+            finding MINOR "окружение" "Проверка неполная: нет shellcheck" \
+                "Линтер bash не установлен, поэтому часть проблем в .sh не искалась. Прогон выглядит чище, чем он есть." \
+                "Поставить: apt-get install -y shellcheck (в macOS: brew install shellcheck). На GitHub он ставится сам."
             SHELLCHECK_WARNED=1
         }
     fi
