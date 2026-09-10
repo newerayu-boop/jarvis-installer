@@ -3,7 +3,14 @@
 # Использование: curl -sSL URL | bash
 
 set -e
-G='\033[0;32m'; Y='\033[1;33m'; N='\033[0m'
+G='\033[0;32m'; Y='\033[1;33m'; R='\033[0;31m'; N='\033[0m'
+
+# Ниже ставится git через apt — без root это выдаст поток «Permission denied»,
+# и ученик решит, что сломал сервер.
+if [ "$(id -u)" -ne 0 ]; then
+    echo -e "${R}Запусти от root:${N}  sudo bash download.sh"
+    exit 1
+fi
 
 echo -e "${Y}Скачиваю Jarvis Installer...${N}"
 

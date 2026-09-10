@@ -98,12 +98,21 @@ function fontSpec() {
  * @param {{name:string, number:string|number, tarif?:string}} data
  * @returns {Promise<Buffer>}
  */
+// В шрифтах билета нет эмодзи: они печатаются пустым квадратом, и такой
+// билет уходит клиенту. Убираем их до рендера — пустое поле честнее «тофу».
+function printable(s) {
+  return String(s == null ? '' : s)
+    .replace(/[\p{Extended_Pictographic}‍️︎]/gu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 async function renderTicketPng(data) {
   const satori = (await import('satori')).default;
   const svg = await satori(buildTree({
-    name: String(data.name || '').trim(),
+    name: printable(data.name),
     number: String(data.number || '').trim(),
-    tarif: data.tarif && String(data.tarif).trim(),
+    tarif: printable(data.tarif) || undefined,
   }), { width: W, height: H, fonts: fontSpec() });
   return new Resvg(svg, { fitTo: { mode: 'width', value: W } }).render().asPng();
 }

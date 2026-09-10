@@ -1,0 +1,47 @@
+name: QA — проверка перед выдачей ученикам
+
+on:
+  # На ветках проверку запускает pull_request, поэтому push ловим только
+  # для main — иначе на каждый коммит в PR запускалось бы два одинаковых прогона.
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Новый пуш отменяет ещё не закончившийся прогон по той же ветке.
+concurrency:
+  group: qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Линтер полезен, но недоступный apt-репозиторий не должен ронять проверку:
+      # без shellcheck набор отработает и сам сообщит, что часть проблем не искалась.
+      - name: Установить shellcheck
+        continue-on-error: true
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+
+      - name: Прогнать QA
+        id: qa
+        run: bash qa/run.sh
+        env:
+          NO_COLOR: '1'
+
+      - name: Показать отчёт в сводке
+        if: always()
+        run: cat qa/report/BUGS.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Сохранить отчёт
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-report
+          path: qa/report/
