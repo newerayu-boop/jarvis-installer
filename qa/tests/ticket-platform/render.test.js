@@ -49,6 +49,12 @@ test('пустое имя не роняет процесс', async () => {
   await assert.doesNotReject(() => renderTicketPng({ name: '', number: '13' }));
 });
 
-test('эмодзи в имени не роняют процесс', { todo: 'проверить QA-05: шрифт без эмодзи' }, async () => {
-  await assert.doesNotReject(() => renderTicketPng({ name: 'Nurgul 🎉', number: '13' }));
+test('эмодзи вычищаются, а не печатаются пустым квадратом', async () => {
+  // В шрифтах билета эмодзи нет: без чистки клиент получает «тофу» ▤.
+  const png = await renderTicketPng({ name: 'Nurgul 🎉 Bekova', number: '13', tarif: '🔥' });
+  assert.ok(isPng(png));
+  // Тариф из одних эмодзи становится пустым, и подставляется тариф по умолчанию.
+  const clean = await renderTicketPng({ name: 'Nurgul Bekova', number: '13' });
+  assert.strictEqual(png.length, clean.length,
+    'билет с эмодзи должен выглядеть ровно как билет без них');
 });

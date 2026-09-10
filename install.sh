@@ -27,11 +27,56 @@ echo -e "${N}"
 
 [ ! -f "./jarvis.env" ] && err "Файл jarvis.env не найден!\nСкопируй: cp jarvis.env.example jarvis.env\nЗатем заполни все поля и снова запусти установщик."
 
+# Файл, сохранённый в Windows, содержит \r в конце каждой строки. Он попадёт
+# внутрь токена, бот молча не запустится, а установка скажет «успешно».
+if grep -q $'\r' ./jarvis.env; then
+    sed -i 's/\r$//' ./jarvis.env
+    warn "Файл был сохранён в Windows — лишние символы убраны"
+fi
+
 source ./jarvis.env
+
+# Пробелы по краям прилипают при копировании токена из Telegram.
+for var in BOT_USERNAME TELEGRAM_TOKEN OWNER_TELEGRAM_ID OWNER_NAME BOT_NAME OPENROUTER_KEY GROQ_KEY AISHA_KEY; do
+    printf -v "$var" '%s' "$(printf '%s' "${!var:-}" | xargs 2>/dev/null || printf '%s' "${!var:-}")"
+done
 
 for var in BOT_USERNAME TELEGRAM_TOKEN OWNER_TELEGRAM_ID OWNER_NAME BOT_NAME OPENROUTER_KEY GROQ_KEY; do
     [ -z "${!var}" ] && err "Не заполнено: $var в файле jarvis.env"
 done
+
+# Значения из примера остались нетронутыми. Без этой проверки установка
+# проходит «успешно», бот молчит, и причину не найти ни вам, ни ученику.
+for var in TELEGRAM_TOKEN OWNER_TELEGRAM_ID OPENROUTER_KEY GROQ_KEY; do
+    case "${!var}" in
+        *xxxx*|*XXXX*|*ВАШ*|*change-me*)
+            err "$var не заполнен: там осталось значение из примера.\nОткрой jarvis.env и впиши свой ключ вместо строки с xxxx." ;;
+    esac
+done
+
+# Формат каждого ключа. Ошибку показываем сразу, а не через пять минут установки.
+[[ "$TELEGRAM_TOKEN" =~ ^[0-9]{8,12}:[A-Za-z0-9_-]{30,}$ ]] || \
+    err "TELEGRAM_TOKEN не похож на токен бота.\nОн выглядит так: 1234567890:AAF... Возьми его у @BotFather → /mybots → твой бот → API Token."
+
+[[ "$OWNER_TELEGRAM_ID" =~ ^[0-9]+$ ]] || \
+    err "OWNER_TELEGRAM_ID должен быть числом, а не «$OWNER_TELEGRAM_ID».\nЭто НЕ твой @ник. Напиши @userinfobot — он пришлёт число вида 123456789."
+
+case "$OPENROUTER_KEY" in
+    sk-or-*) : ;;
+    *) err "OPENROUTER_KEY не похож на ключ OpenRouter.\nОн начинается с sk-or-v1-. Возьми на openrouter.ai → Keys." ;;
+esac
+
+case "$GROQ_KEY" in
+    gsk_*) : ;;
+    *) err "GROQ_KEY не похож на ключ Groq.\nОн начинается с gsk_. Возьми на console.groq.com → API Keys." ;;
+esac
+
+if [ -n "${AISHA_KEY:-}" ]; then
+    case "$AISHA_KEY" in
+        *xxxx*|*XXXX*) err "AISHA_KEY содержит значение из примера. Впиши свой ключ или оставь поле пустым." ;;
+    esac
+fi
+
 ok "Конфиг проверен"
 
 # Дефолты
@@ -61,8 +106,9 @@ else
     ok "Пользователь aibot уже существует"
 fi
 loginctl enable-linger aibot
-mkdir -p /run/user/$(id -u aibot)
-chown aibot:aibot /run/user/$(id -u aibot)
+AIBOT_UID="$(id -u aibot)"
+mkdir -p "/run/user/$AIBOT_UID"
+chown aibot:aibot "/run/user/$AIBOT_UID"
 
 # ─── 4. Структура директорий ──────────────────────────────────
 step "4/8 Структура директорий"
@@ -227,7 +273,9 @@ chown aibot:aibot "$BASE/transcribe.py"
 ok "transcribe.py создан"
 
 # ─── Патч медиа-транскрипции (КРИТИЧНО) ───────────────────────
-MEDIA_JS=$(find /usr/lib/node_modules/openclaw/dist -name "media-understanding.runtime-*.js" 2>/dev/null | head -1)
+# Путь к глобальным модулям спрашиваем у npm: на разных VPS он разный,
+# и жёсткий /usr/lib/node_modules просто не находится — голосовые молча не работают.
+MEDIA_JS=$(find "$OPENCLAW_DIST" -name "media-understanding.runtime-*.js" 2>/dev/null | head -1)
 
 if [ -n "$MEDIA_JS" ]; then
     cp "$MEDIA_JS" "${MEDIA_JS}.bak"

@@ -52,10 +52,13 @@ for f in "${SCRIPTS[@]}"; do
             "Добавить в начало: [ \"\$EUID\" -ne 0 ] && { echo 'Запусти: sudo bash $f'; exit 1; }"
     fi
 
-    # 1.5 Захардкоженные пути в node_modules (ломаются на другом дистрибутиве)
-    if grep -qE '/usr/(lib|local/lib)/node_modules' "$p"; then
+    # 1.5 Захардкоженные пути в node_modules (ломаются на другом дистрибутиве).
+    # Комментарии пропускаем: строка, объясняющая, почему так делать нельзя,
+    # сама не является кодом.
+    hits=$(grep -nE '/usr/(lib|local/lib)/node_modules' "$p" | grep -vE '^[0-9]+:\s*#' | head -3)
+    if [ -n "$hits" ]; then
         fail_with MAJOR "$f" "Захардкожен путь к глобальным node_modules" \
-            "$(grep -nE '/usr/(lib|local/lib)/node_modules' "$p" | head -3 | tr '\n' ' ')" \
+            "$(printf '%s' "$hits" | tr '\n' ' ')" \
             "Использовать \$(npm root -g) вместо жёсткого пути — иначе на части VPS файл не найдётся."
     fi
 

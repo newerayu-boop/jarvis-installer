@@ -97,7 +97,7 @@ su -s /bin/bash aibot -c "XDG_RUNTIME_DIR=/run/user/1001 systemctl --user status
 su -s /bin/bash aibot -c "XDG_RUNTIME_DIR=/run/user/1001 systemctl --user restart openclaw-gateway"
 
 # Логи в реальном времени
-journalctl --user-unit=openclaw-gateway -f
+journalctl _UID=$(id -u aibot) -f
 ```
 
 ---
@@ -115,7 +115,7 @@ bash patch-voice.sh
 ## Часто задаваемые вопросы
 
 **Бот не отвечает?**
-→ Проверь логи: `journalctl --user-unit=openclaw-gateway -n 50`
+→ Проверь логи: `journalctl _UID=$(id -u aibot) -n 50`
 
 **Голосовые не распознаются?**
 → Запусти: `bash patch-voice.sh`
@@ -125,7 +125,7 @@ bash patch-voice.sh
 → Перезапусти бота
 
 **Хочу подключить Google Calendar?**
-→ Смотри инструкцию в папке `extras/google-calendar.md`
+→ Пока не входит в установщик. Напиши в поддержку, подключаем вручную.
 
 ---
 

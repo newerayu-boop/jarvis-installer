@@ -1,7 +1,8 @@
 'use strict';
 // Тесты разбора ввода продавца. Запуск: node --test qa/tests/
 // Зелёный тест = поведение зафиксировано и не сломается при правках.
-// todo-тест   = известная дырка, описана в отчёте qa/report/BUGS.md.
+// Случаи ниже собраны живым прогоном бота, а не придуманы: это то,
+// что продавцы реально писали в чат.
 
 const test = require('node:test');
 const assert = require('node:assert');
@@ -60,21 +61,48 @@ test('приветствие показывает пример правильн�
   assert.ok(GREETING.length > 20);
 });
 
-// ── Известные дырки: продавец так пишет, а бот отвечает «не понял» ──
-test('номер со знаком #: «Nurgul Bekova #13»', { todo: 'баг QA-01, см. qa/report/BUGS.md' }, () => {
-  assert.strictEqual(parseInput('Nurgul Bekova #13').number, '13');
+// ── Живой ввод продавца: так пишут на самом деле ──
+test('номер со знаком #: «Nurgul Bekova #13»', () => {
+  const r = parseInput('Nurgul Bekova #13');
+  assert.strictEqual(r.name, 'Nurgul Bekova');
+  assert.strictEqual(r.number, '13');
 });
 
-test('сначала номер: «13 Nurgul Bekova»', { todo: 'баг QA-02' }, () => {
-  assert.strictEqual(parseInput('13 Nurgul Bekova').name, 'Nurgul Bekova');
+test('номер со знаком №: «Nurgul Bekova №13»', () => {
+  assert.strictEqual(parseInput('Nurgul Bekova №13').number, '13');
 });
 
-test('имя и номер через тире: «Nurgul Bekova - 13»', { todo: 'баг QA-03' }, () => {
+test('сначала номер: «13 Nurgul Bekova»', () => {
+  const r = parseInput('13 Nurgul Bekova');
+  assert.strictEqual(r.name, 'Nurgul Bekova');
+  assert.strictEqual(r.number, '13');
+});
+
+test('имя и номер через тире: тире не попадает на билет', () => {
   assert.strictEqual(parseInput('Nurgul Bekova - 13').name, 'Nurgul Bekova');
 });
 
-test('тариф с эмодзи не должен ломать разбор', { todo: 'баг QA-04' }, () => {
-  assert.ok(parseInput('Nurgul Bekova 13 🔥'));
+test('тариф с эмодзи не ломает разбор', () => {
+  const r = parseInput('Nurgul Bekova 13 🔥');
+  assert.strictEqual(r.number, '13');
+  assert.strictEqual(r.tarif, '🔥');
+});
+
+test('номером считается последнее число, а не первое', () => {
+  // «Nurgul 2 Bekova 13»: цифра внутри имени не должна становиться номером билета.
+  const r = parseInput('Nurgul 2 Bekova 13');
+  assert.strictEqual(r.name, 'Nurgul 2 Bekova');
+  assert.strictEqual(r.number, '13');
+});
+
+test('тариф из нескольких слов сохраняется целиком', () => {
+  assert.strictEqual(parseInput('Nurgul Bekova 13 VIP PREMIUM').tarif, 'VIP PREMIUM');
+});
+
+test('строка без имени билетом не становится', () => {
+  assert.strictEqual(parseInput('7'), null);
+  assert.strictEqual(parseInput('- 13'), null);
+  assert.strictEqual(parseInput('   '), null);
 });
 
 test('текст «не понял» должен подсказывать формат', () => {

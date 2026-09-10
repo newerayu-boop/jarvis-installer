@@ -5,8 +5,15 @@
 set -e
 G='\033[0;32m'; Y='\033[1;33m'; R='\033[0;31m'; N='\033[0m'
 
-MEDIA_JS=$(find /usr/lib/node_modules/openclaw/dist -name "media-understanding.runtime-*.js" 2>/dev/null | head -1)
-[ -z "$MEDIA_JS" ] && echo -e "${R}Файл media-understanding.runtime-*.js не найден${N}" && exit 1
+# Путь к глобальным модулям спрашиваем у npm: на разных VPS он разный.
+OPENCLAW_DIST="$(npm root -g 2>/dev/null)/openclaw/dist"
+MEDIA_JS=$(find "$OPENCLAW_DIST" -name "media-understanding.runtime-*.js" 2>/dev/null | head -1)
+if [ -z "$MEDIA_JS" ]; then
+    echo -e "${R}Файл media-understanding.runtime-*.js не найден${N}"
+    echo "Искали в: $OPENCLAW_DIST"
+    echo "Проверь, что openclaw установлен:  npm list -g openclaw"
+    exit 1
+fi
 
 # Проверяем — уже пропатчен?
 if grep -q "transcribe.py" "$MEDIA_JS" 2>/dev/null; then
